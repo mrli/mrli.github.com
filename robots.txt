@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://yoursite.com/sitemap.xml 
+Sitemap: http://mrli.github.io/sitemap.xml 
