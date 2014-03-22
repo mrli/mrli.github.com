@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Lioooo]]></title>
   <link href="http://mrli.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-03-22T16:49:32+08:00</updated>
+  <updated>2014-03-22T16:54:29+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
@@ -72,6 +72,368 @@ Time is 2014-03-11 01:08:18 +0800
 <h5>建议使用1025~48 999之间的端口</h5>
 
 <p>需要注意的是：如果你打算选用其中的一个作为服务器端口,那你应该看一下IANA的注册端口列表1,确保你的选择不会和其他流行的服务器冲突。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Delayed_job 学习]]></title>
+    <link href="http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby/"/>
+    <updated>2014-01-10T16:37:13+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby</id>
+    <content type="html"><![CDATA[<h5>初始化环境</h5>
+
+<p>```</p>
+
+<pre><code>echo "'delayed_job_active_record','4.0.0'" &gt;&gt; Rails.root/Gemfile
+
+cd Rails.root; bundle install
+
+bundle exec rake generate delayed_job:active_record
+
+rake db:migrate
+</code></pre>
+
+<p>```</p>
+
+<p>以上执行完毕后基本的环境已经准备ok!</p>
+
+<h5>启动delayed_job</h5>
+
+<p><code>
+cd Rails.root; script/delayed_job start
+</code></p>
+
+<h5>添加一个delayed_job 到代码中</h5>
+
+<p>对于ruby 中的任何一个对象,都可以添加到delayed_job中去
+例如:</p>
+
+<p>```
+class Myjob
+  def do_something</p>
+
+<pre><code> #your code
+</code></pre>
+
+<p>  end
+end
+Myjob.new.delay.do_something
+```</p>
+
+<h5>配置默认设置 <a href="https://github.com/collectiveidea/delayed_job#gory-details">参考配置</a></h5>
+
+<p>在rails中可以自定义修改<strong><em>delayed_job</em></strong>的默认配置</p>
+
+<p><code>
+cd Rails.root; vi config/initializers/delayed_job_config.rb
+</code></p>
+
+<p><code>
+Delayed::Worker.destroy_failed_jobs = false
+Delayed::Worker.sleep_delay = 60
+Delayed::Worker.max_attempts = 3
+Delayed::Worker.max_run_time = 5.minutes
+Delayed::Worker.read_ahead = 10
+Delayed::Worker.default_queue_name = 'default'
+Delayed::Worker.delay_jobs = !Rails.env.test?
+</code></p>
+
+<h5>其它相关</h5>
+
+<p><strong><strong><a href="https://github.com/ejschmitt/delayed_job_web">delayed_job</a></strong></strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Backup 学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/20/backup-xue-xi/"/>
+    <updated>2012-05-20T23:19:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/20/backup-xue-xi</id>
+    <content type="html"><![CDATA[<p>用于备件数据库和文件等(主要是用ruby写的)文章参考: <a href="https://github.com/meskyanichi/backup">https://github.com/meskyanichi/backup</a></p>
+
+<p>安装</p>
+
+<p>```</p>
+
+<pre><code> $ gem install backup
+</code></pre>
+
+<p>```</p>
+
+<p>生成一个backup配置</p>
+
+<p>```</p>
+
+<pre><code> $ backup generate:model --trigger db_backup --databases='mysql' --compressors='gzip' --config-path= ~/dev_study/gem/backup_study/
+</code></pre>
+
+<p>```</p>
+
+<p>打开刚才生成的配置文件进行配置 <code>$ subl ~/dev_study/gem/backup_study</code></p>
+
+<p>执行命令来进行备件:</p>
+
+<p>```</p>
+
+<pre><code>  $ backup perform --trigger db_backup  --root-path=~/dev_study/gem/backup_study/
+</code></pre>
+
+<p>```</p>
+
+<p>加上自备份功能:</p>
+
+<ul>
+<li> gem install whenever (参考文章: <a href="https://github.com/javan/whenever">https://github.com/javan/whenever</a>)</li>
+<li><p> cd ~/dev_study/gem/backup_study/</p></li>
+<li><p> wheneverize.</p></li>
+<li> subl . 修改config/schedule.rb文件(当你修改了whenever的时候 执行命令:whenever &mdash;update-crontab 来更新自动执行任务事件 )
+加入自动执行的命令:</li>
+</ul>
+
+
+<p>```
+every 1.day, :at => &lsquo;12:13 am&rsquo; do
+  command &ldquo;backup perform &mdash;trigger db_backup  &mdash;root-path=~/dev_study/gem/backup_study&rdquo;
+end</p>
+
+<p>```</p>
+
+<p>由上就可以在每天 12:13 的时候执行backup 命令,而这个命令是备件数据</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jeweler学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/19/jewelerxue-xi/"/>
+    <updated>2012-05-19T10:41:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/19/jewelerxue-xi</id>
+    <content type="html"><![CDATA[<p>Jeweler 提供给ruby开发者二个强大的功能:</p>
+
+<ul>
+<li>用来管理和发布RubyGem项目版本</li>
+<li>用特有的框架来生成一个新的RubyGem项目</li>
+</ul>
+
+
+<h2>下面我们就开始学习这个强大而简单的工具</h2>
+
+<h1>安装</h1>
+
+<pre><code>$ gem install jeweler
+</code></pre>
+
+<h1>生成项目文件</h1>
+
+<p>当你安装好"jeweler"后,你就可以用"jeweler"命令来生成新的项目像下面一样:<br/>
+这个需要一些git的配置信息(例如: name, email github account etc ..) 不用担心 &ldquo;jeweler"会帮你管理这些配置的</p>
+
+<pre><code>$ jeweler ~/dev_study/gem/mrlic
+</code></pre>
+
+<p>生成过程中可以会发现:</p>
+
+<p>No github.user found in ~/.gitconfig. Please tell git about your GitHub account (see <a href="http://github.com/blog/180-local-github-config">http://github.com/blog/180-local-github-config</a> for details). For example: git config &mdash;global github.user defunkt</p>
+
+<p>意思说你要给"jeweler"一些关于github的信息处理方法很简单,在终端窗口执行命令:</p>
+
+<pre><code>$ git config --global github.user you_github_account_name(你在github上的用户名)
+</code></pre>
+
+<p>进入到项目根目录:</p>
+
+<pre><code>$ cd ~/dev_study/gem/mrlic 
+</code></pre>
+
+<p>安装依赖的gem包:</p>
+
+<pre><code>$ bundle install 
+</code></pre>
+
+<p>顺便说一名喜欢用 &ldquo;<a href="http://ruby.taobao.org">http://ruby.taobao.org</a>"做为gem包的镜像地址,如果你喜欢你可以照下面来做<br/>
+在 Gemfile中把"<a href="http://rubygems.org">http://rubygems.org</a>"替换成"<a href="http://ruby.taobao.org">http://ruby.taobao.org</a>&rdquo;,这样做的好处是安装包的时候速度快  <br/>
+同时我在安装的过程中也出现错误,关于"bundle"和"rcov"版本的问题(由于错误信息较多,这里不一一讲述我把我的方法贴出来)<br/>
+我处理的方法是:在Gemfile中把bundle的版本修改为＂1.1.3＂，"rcov" 版本修改为 &ldquo;0.9.11&rdquo;,等修改完后再次执行命令</p>
+
+<pre><code>$ bundle install 
+</code></pre>
+
+<p>下面是我的Gemfile文件内容
+```</p>
+
+<pre><code>    source "http://ruby.taobao.org"
+    group :development do
+      gem "shoulda", "&gt;= 0"
+      gem "rdoc", "~&gt; 3.12"
+      gem "bundler", "~&gt; 1.1.3"
+      gem "jeweler", "~&gt; 1.8.3"
+      gem "rcov", "0.9.11"
+    end
+</code></pre>
+
+<p>```</p>
+
+<h1>写自己的代码</h1>
+
+<p>[最核心的功能]在项目中文件"lib/mrlic.rb",因为这只是我测试的项目我写了一个方法,这个方法就是输出一字符串
+```</p>
+
+<pre><code>def desc
+     puts "this is mrli command collect"
+end
+</code></pre>
+
+<p>```
+给gem生成版本号,用于管理</p>
+
+<pre><code>$　rake version:write MAJOR=0 MINOR=1 PATCH=0
+</code></pre>
+
+<p>执行命令(可以查看当前的版本)如果想了解更多的rake命令到项目根目录中执行<code>$ rake -T</code></p>
+
+<pre><code>$ rake version
+</code></pre>
+
+<p>从本地文件中安装这个gem(mrlic)</p>
+
+<pre><code>$ rake install
+</code></pre>
+
+<p>在运行的过程中你会发现错误信息:</p>
+
+<p>```</p>
+
+<pre><code>rake aborted!
+"FIXME" or "TODO" is not a description
+</code></pre>
+
+<p><code>
+我的处理方法是:在项目Rakefile文件中把内容为:
+</code>
+  gem.summary = %Q{TODO: one-line summary of your gem}
+  gem.description = %Q{longer description of your gem}
+<code>
+修改为
+</code></p>
+
+<pre><code>gem.summary = "one-line summary of your gem"
+gem.description = "longer description of your gem"
+</code></pre>
+
+<p><code>
+修改后再次执行命令`$ rake install `如果成功的话会出现提示消息:
+</code></p>
+
+<pre><code>Successfully built RubyGem
+</code></pre>
+
+<p>  Name: mrlic
+  Version: 0.1.0
+  File: mrlic-0.1.0.gem</p>
+
+<pre><code>Executing "ruby -S gem install ./pkg/mrlic-0.1.0.gem":
+ruby -S gem install ./pkg/mrlic-0.1.0.gem
+Successfully installed mrlic-0.1.0
+1 gem installed
+</code></pre>
+
+<p>```</p>
+
+<h1>测试</h1>
+
+<p>打开新的终端输入命令<code>$ pry</code>(<a href="pry.github.com">pry是一个非常好的命令交互工具</a>)<br/>
+```</p>
+
+<pre><code>[1] pry(main)&gt; require "mrlic"
+=&gt; true
+[2] pry(main)&gt; desc
+this is mrli command collect
+=&gt; nil
+[3] pry(main)&gt; 
+</code></pre>
+
+<p>```
+可见"mrlic"gem已经在本志安装好了</p>
+
+<h1>分享</h1>
+
+<p>下面我们把这个gem放到github上分享给大家</p>
+
+<ul>
+<li> 在github上新一个和"mrlic"相同命名项目(没有账号的就注册一个"<a href="http://www.github.com">http://www.github.com</a>")</li>
+<li> 回到项目文件中 $ cd ~/dev_study/mrlic</li>
+<li> git add .</li>
+<li> git commit -a -m &ldquo;init mrlic&rdquo;</li>
+<li> git pull (把刚才新建的项目pull下来和本地的合并)</li>
+<li> $ rake release (在发布的过程中会让你输入"rubygems"的账号,没有的就注册一个)</li>
+</ul>
+
+
+<p>执行命令<code>$ rake release</code>如果一切顺利的话会出现信息:
+```</p>
+
+<pre><code>    rm -r pkg/mrlic-0.1.0.gem
+    Committing mrlic.gemspec
+    Pushing master to origin
+    Tagging v0.1.0
+    Pushing v0.1.0 to origin
+    Generated: mrlic.gemspec
+    mrlic.gemspec is valid.
+      Successfully built RubyGem
+      Name: mrlic
+      Version: 0.1.0
+      File: mrlic-0.1.0.gem
+    Executing "gem push ./pkg/mrlic-0.1.0.gem":
+    gem push ./pkg/mrlic-0.1.0.gem
+    Enter your RubyGems.org credentials.
+    Don't have an account yet? Create one at http://rubygems.org/sign_up
+       Email:   lb563@foxmail.com
+    Password:  
+    Pushing gem to https://rubygems.org...
+    Signed in.
+    Pushing gem to https://rubygems.org...
+    Successfully registered gem: mrlic (0.1.0)
+</code></pre>
+
+<p>```
+到此你的gem已经发布到公网上,并可以让其它人使用了<br/>
+更多信息参考 <a href="https://github.com/technicalpickles/jeweler">jeweler</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pry学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/13/pryxue-xi/"/>
+    <updated>2012-05-13T00:15:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/13/pryxue-xi</id>
+    <content type="html"><![CDATA[<p>Pry是一种功能强大的专门用来替代ruby中脚本irb的工具。</p>
+
+<ul>
+<li>即时的查看源码的方法是怎么写的 (<code>edit-method Class#method</code>)</li>
+<li>调用系统的shell命令 (start editors, run git, and rake from within Pry)</li>
+<li>查看当前的状态 (<code>cd</code>, <code>ls</code> and friends)</li>
+<li>运行时的调试 (use Pry as a developer console or debugger)</li>
+</ul>
+
+
+<h3>安装 pry</h3>
+
+<pre><code>`$&gt; gem install pry`
+</code></pre>
+
+<h3>使用 pry</h3>
+
+<pre><code>`$&gt; pry`
+</code></pre>
+
+<h3>对我来说常用的命令</h3>
+
+<pre><code>.......
+</code></pre>
+
+<h3>更多</h3>
+
+<pre><code>更多信息请查看官方文档[pry](http://pry.github.com/)
+</code></pre>
 ]]></content>
   </entry>
   

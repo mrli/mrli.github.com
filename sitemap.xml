@@ -2,31 +2,31 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin/</loc>
-        <lastmod>2014-02-26T00:21:22+08:00</lastmod>
+        <lastmod>2014-03-22T16:53:12+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2012/05/05/gon-xue-xi/</loc>
-        <lastmod>2014-02-26T00:21:22+08:00</lastmod>
+        <lastmod>2014-03-22T16:53:35+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2012/05/13/pryxue-xi/</loc>
-        <lastmod>2014-02-26T00:21:22+08:00</lastmod>
+        <lastmod>2014-03-22T16:53:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2012/05/19/jewelerxue-xi/</loc>
-        <lastmod>2014-02-26T00:21:22+08:00</lastmod>
+        <lastmod>2014-03-22T16:53:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2012/05/20/backup-xue-xi/</loc>
-        <lastmod>2014-02-26T00:21:22+08:00</lastmod>
+        <lastmod>2014-03-22T16:53:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/</loc>
-        <lastmod>2014-02-26T00:21:22+08:00</lastmod>
+        <lastmod>2014-03-22T16:54:10+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby/</loc>
-        <lastmod>2014-03-22T16:48:44+08:00</lastmod>
+        <lastmod>2014-03-22T16:54:14+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2014/02/14/octopress-study/</loc>
@@ -38,7 +38,7 @@
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2014/03/02/puppet-study/</loc>
-        <lastmod>2014-03-22T16:49:05+08:00</lastmod>
+        <lastmod>2014-03-22T16:54:23+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/2014/03/05/virtualbox-no-ip-config-issue/</loc>
@@ -49,16 +49,16 @@
         <lastmod>2014-03-22T16:49:09+08:00</lastmod>
     </url>
     <url>
-        <loc>http://mrli.github.io/blog/2014/03/25/install-docker/</loc>
-        <lastmod>2014-03-22T16:49:18+08:00</lastmod>
+        <loc>http://mrli.github.io/blog/2014/03/22/install-docker/</loc>
+        <lastmod>2014-03-22T16:54:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/blog/archives/</loc>
-        <lastmod>2014-03-22T16:49:18+08:00</lastmod>
+        <lastmod>2014-03-22T16:54:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/</loc>
-        <lastmod>2014-03-22T16:49:18+08:00</lastmod>
+        <lastmod>2014-03-22T16:54:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://mrli.github.io/robots.txt</loc>

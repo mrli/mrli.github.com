@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby,Gems | Lioooo]]></title>
   <link href="http://mrli.github.io/blog/categories/ruby-gems/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-03-22T16:49:32+08:00</updated>
+  <updated>2014-03-22T16:54:29+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
@@ -14,71 +14,117 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Delayed_job 学习]]></title>
-    <link href="http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby/"/>
-    <updated>2014-01-10T16:37:13+08:00</updated>
-    <id>http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby</id>
-    <content type="html"><![CDATA[<h5>初始化环境</h5>
+    <title type="html"><![CDATA[Activeadmin学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin/"/>
+    <updated>2012-05-01T21:50:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin</id>
+    <content type="html"><![CDATA[<h2>是什么?</h2>
 
-<p>```</p>
+<p>Active Admin 是一个用来创建管理数据的框架,通常对于开发都来说都是十分简单的.他提供了良好的接口和优美的界面<br/>
+让你只做一点点的配置就可以管理数据.</p>
 
-<pre><code>echo "'delayed_job_active_record','4.0.0'" &gt;&gt; Rails.root/Gemfile
+<h2>做什么?</h2>
 
-cd Rails.root; bundle install
+<ol>
+<li>让开发者快速的建立一个对数据具有强大管理功能的架构.<strong>不仅仅是(增删改查)</strong></li>
+<li>提供给开发者强大的DSL功能和接口</li>
+<li>确保开发人员可以轻松地定制的每一个实现的细节</li>
+<li>构建公共的接口做为可共享的gems,有整个社区的发展。</li>
+</ol>
 
-bundle exec rake generate delayed_job:active_record
 
-rake db:migrate
-</code></pre>
+<h2>开始第一个简单开发之旅:</h2>
 
-<p>```</p>
+<p>   这里我会做一个简单的例子,让大家来体会Active Admin 是怎么个方便,怎么个简单,怎么个好用.</p>
 
-<p>以上执行完毕后基本的环境已经准备ok!</p>
+<h5>安装必要的开发环境(我的是环境是:rails(3.2.2)+ruby(1.9.3))安装gem包:</h5>
 
-<h5>启动delayed_job</h5>
+<p>  <code>$&gt; gem 'activeadmin'</code></p>
 
-<p><code>
-cd Rails.root; script/delayed_job start
-</code></p>
+<h5>新创建一个项目:</h5>
 
-<h5>添加一个delayed_job 到代码中</h5>
+<p>  <code>$&gt; rails new active_admin_study -d mysql  &amp;&amp; cd active_admin_study</code></p>
 
-<p>对于ruby 中的任何一个对象,都可以添加到delayed_job中去
-例如:</p>
+<h5>在项目根目录中生成相应的配置 :</h5>
 
-<p>```
-class Myjob
-  def do_something</p>
+<p>  打开项目中的Gemfile 然后加上内容</p>
 
-<pre><code> #your code
-</code></pre>
+<pre><code># 修改为taobao的镜像(主要是安装gem的时候速度快)
+source 'http://ruby.taobao.org'
 
-<p>  end
+# 基本设置
+gem 'rails', '3.2.3'
+gem 'mysql2',"0.3.11"
+
+# 管理数据的框架
+gem 'activeadmin',"0.4.3"
+
+# 用来调试程序(设断点等功能)
+gem "pry-rails","0.1.6"
+
+group :assets do
+  gem 'sass-rails',   '~&gt; 3.2.3'
+  gem 'coffee-rails', '~&gt; 3.2.1'
+  gem 'uglifier', '&gt;= 1.0.3'
 end
-Myjob.new.delay.do_something
-```</p>
 
-<h5>配置默认设置 <a href="https://github.com/collectiveidea/delayed_job#gory-details">参考配置</a></h5>
+gem 'jquery-rails'
+</code></pre>
 
-<p>在rails中可以自定义修改<strong><em>delayed_job</em></strong>的默认配置</p>
+<p>  然后执行命令<code>$&gt; bundle install</code> or <code>$&gt; bundle</code>等bundle执行完毕后</p>
 
-<p><code>
-cd Rails.root; vi config/initializers/delayed_job_config.rb
-</code></p>
+<p>  <code>$&gt; rails generate active_admin:install</code></p>
 
-<p><code>
-Delayed::Worker.destroy_failed_jobs = false
-Delayed::Worker.sleep_delay = 60
-Delayed::Worker.max_attempts = 3
-Delayed::Worker.max_run_time = 5.minutes
-Delayed::Worker.read_ahead = 10
-Delayed::Worker.default_queue_name = 'default'
-Delayed::Worker.delay_jobs = !Rails.env.test?
-</code></p>
+<pre><code>1: 可能在执行的过程中会出现一个&lt;strong&gt;找不到"active_admin_study"数据库
+  &lt;strong&gt;错误,处理方法是在自己的数据库中加一个名为"active_admin_study"的库 然后再次执行.
 
-<h5>其它相关</h5>
+2: 如果成功执行的话会给你很多的提示信息,然后你根据提示信息设置其目录
+</code></pre>
 
-<p><strong><strong><a href="https://github.com/ejschmitt/delayed_job_web">delayed_job</a></strong></strong></p>
+<h4>修改初始化migrate中的数据:</h4>
+
+<p>   把初始化的默认用户修改为自己的用户名和密码也可以不用修改使用默认的</p>
+
+<pre><code>User: admin@example.com  
+Password: password  
+</code></pre>
+
+<h4>执行命令:</h4>
+
+<pre><code>$&gt; rake db:migrate
+
+$&gt; rails server
+</code></pre>
+
+<h4>访问服务:</h4>
+
+<p>   <a href="http://localhost:3000/admin">http://localhost:3000/admin</a></p>
+
+<p>   输入用户名和密码,如果能进去的话.说明你已经搭起了这个框架</p>
+
+<h2>管理数据</h2>
+
+<p>   这里我们来学习怎么来管理数据库表中的数据就把我们的"admin_user" 这张表来说吧.</p>
+
+<h4>执行命令:</h4>
+
+<p>  <code>$&gt; rails generate active_admin:resource AdminUser</code></p>
+
+<p>他会生成所有关于管理"AdminUser"的文件,是的再次刷新页面你会发现多了一个"admin_user"菜单,点击后就进行了相应的管理页面</p>
+
+<h2>完结</h2>
+
+<p>  是的就这么简单,不需要你做任何的复杂的操作就可以生成这么一个简单而方便的管理框架,当然这只是一个小小的一般需求.
+  还有很多特殊的需求我们也可以用这个来实现.你可以对比官方文档来使用,自定义等</p>
+
+<p>  在我做的项目中就自己定制了很多东西,包括页面的呈现,数据的组装等</p>
+
+<p>  我会把我的学习源码放到<a href="https://github.com/mrli/active_admin_study">mrli/github</a>你可以pull来直接使用</p>
+
+<h2>更多</h2>
+
+<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#108;&#x62;&#53;&#54;&#51;&#x40;&#x66;&#x6f;&#x78;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#108;&#x62;&#x35;&#54;&#x33;&#64;&#x66;&#111;&#x78;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#109;</a>)<br/>
+  更多信息<a href="http://activeadmin.info/">active_admin</a></p>
 ]]></content>
   </entry>
   
