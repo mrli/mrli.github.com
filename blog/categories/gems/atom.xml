@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gems | My Octopress Blog]]></title>
+  <link href="http://mrli.github.io/blog/categories/gems/atom.xml" rel="self"/>
+  <link href="http://mrli.github.io/"/>
+  <updated>2014-03-22T16:26:10+08:00</updated>
+  <id>http://mrli.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Backup 学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/20/backup-xue-xi/"/>
+    <updated>2012-05-20T23:19:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/20/backup-xue-xi</id>
+    <content type="html"><![CDATA[<p>用于备件数据库和文件等(主要是用ruby写的)文章参考: <a href="https://github.com/meskyanichi/backup">https://github.com/meskyanichi/backup</a></p>
+
+<p>安装</p>
+
+<p>```</p>
+
+<pre><code> $ gem install backup
+</code></pre>
+
+<p>```</p>
+
+<p>生成一个backup配置</p>
+
+<p>```</p>
+
+<pre><code> $ backup generate:model --trigger db_backup --databases='mysql' --compressors='gzip' --config-path= ~/dev_study/gem/backup_study/
+</code></pre>
+
+<p>```</p>
+
+<p>打开刚才生成的配置文件进行配置 <code>$ subl ~/dev_study/gem/backup_study</code></p>
+
+<p>执行命令来进行备件:</p>
+
+<p>```</p>
+
+<pre><code>  $ backup perform --trigger db_backup  --root-path=~/dev_study/gem/backup_study/
+</code></pre>
+
+<p>```</p>
+
+<p>加上自备份功能:</p>
+
+<ul>
+<li> gem install whenever (参考文章: <a href="https://github.com/javan/whenever">https://github.com/javan/whenever</a>)</li>
+<li><p> cd ~/dev_study/gem/backup_study/</p></li>
+<li><p> wheneverize.</p></li>
+<li> subl . 修改config/schedule.rb文件(当你修改了whenever的时候 执行命令:whenever &mdash;update-crontab 来更新自动执行任务事件 )
+加入自动执行的命令:</li>
+</ul>
+
+
+<p>```
+every 1.day, :at => &lsquo;12:13 am&rsquo; do
+  command &ldquo;backup perform &mdash;trigger db_backup  &mdash;root-path=~/dev_study/gem/backup_study&rdquo;
+end</p>
+
+<p>```</p>
+
+<p>由上就可以在每天 12:13 的时候执行backup 命令,而这个命令是备件数据</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Jeweler学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/19/jewelerxue-xi/"/>
+    <updated>2012-05-19T10:41:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/19/jewelerxue-xi</id>
+    <content type="html"><![CDATA[<p>Jeweler 提供给ruby开发者二个强大的功能:</p>
+
+<ul>
+<li>用来管理和发布RubyGem项目版本</li>
+<li>用特有的框架来生成一个新的RubyGem项目</li>
+</ul>
+
+
+<h2>下面我们就开始学习这个强大而简单的工具</h2>
+
+<h1>安装</h1>
+
+<pre><code>$ gem install jeweler
+</code></pre>
+
+<h1>生成项目文件</h1>
+
+<p>当你安装好"jeweler"后,你就可以用"jeweler"命令来生成新的项目像下面一样:<br/>
+这个需要一些git的配置信息(例如: name, email github account etc ..) 不用担心 &ldquo;jeweler"会帮你管理这些配置的</p>
+
+<pre><code>$ jeweler ~/dev_study/gem/mrlic
+</code></pre>
+
+<p>生成过程中可以会发现:</p>
+
+<p>No github.user found in ~/.gitconfig. Please tell git about your GitHub account (see <a href="http://github.com/blog/180-local-github-config">http://github.com/blog/180-local-github-config</a> for details). For example: git config &mdash;global github.user defunkt</p>
+
+<p>意思说你要给"jeweler"一些关于github的信息处理方法很简单,在终端窗口执行命令:</p>
+
+<pre><code>$ git config --global github.user you_github_account_name(你在github上的用户名)
+</code></pre>
+
+<p>进入到项目根目录:</p>
+
+<pre><code>$ cd ~/dev_study/gem/mrlic 
+</code></pre>
+
+<p>安装依赖的gem包:</p>
+
+<pre><code>$ bundle install 
+</code></pre>
+
+<p>顺便说一名喜欢用 &ldquo;<a href="http://ruby.taobao.org">http://ruby.taobao.org</a>"做为gem包的镜像地址,如果你喜欢你可以照下面来做<br/>
+在 Gemfile中把"<a href="http://rubygems.org">http://rubygems.org</a>"替换成"<a href="http://ruby.taobao.org">http://ruby.taobao.org</a>&rdquo;,这样做的好处是安装包的时候速度快  <br/>
+同时我在安装的过程中也出现错误,关于"bundle"和"rcov"版本的问题(由于错误信息较多,这里不一一讲述我把我的方法贴出来)<br/>
+我处理的方法是:在Gemfile中把bundle的版本修改为＂1.1.3＂，"rcov" 版本修改为 &ldquo;0.9.11&rdquo;,等修改完后再次执行命令</p>
+
+<pre><code>$ bundle install 
+</code></pre>
+
+<p>下面是我的Gemfile文件内容
+```</p>
+
+<pre><code>    source "http://ruby.taobao.org"
+    group :development do
+      gem "shoulda", "&gt;= 0"
+      gem "rdoc", "~&gt; 3.12"
+      gem "bundler", "~&gt; 1.1.3"
+      gem "jeweler", "~&gt; 1.8.3"
+      gem "rcov", "0.9.11"
+    end
+</code></pre>
+
+<p>```</p>
+
+<h1>写自己的代码</h1>
+
+<p>[最核心的功能]在项目中文件"lib/mrlic.rb",因为这只是我测试的项目我写了一个方法,这个方法就是输出一字符串
+```</p>
+
+<pre><code>def desc
+     puts "this is mrli command collect"
+end
+</code></pre>
+
+<p>```
+给gem生成版本号,用于管理</p>
+
+<pre><code>$　rake version:write MAJOR=0 MINOR=1 PATCH=0
+</code></pre>
+
+<p>执行命令(可以查看当前的版本)如果想了解更多的rake命令到项目根目录中执行<code>$ rake -T</code></p>
+
+<pre><code>$ rake version
+</code></pre>
+
+<p>从本地文件中安装这个gem(mrlic)</p>
+
+<pre><code>$ rake install
+</code></pre>
+
+<p>在运行的过程中你会发现错误信息:</p>
+
+<p>```</p>
+
+<pre><code>rake aborted!
+"FIXME" or "TODO" is not a description
+</code></pre>
+
+<p><code>
+我的处理方法是:在项目Rakefile文件中把内容为:
+</code>
+  gem.summary = %Q{TODO: one-line summary of your gem}
+  gem.description = %Q{longer description of your gem}
+<code>
+修改为
+</code></p>
+
+<pre><code>gem.summary = "one-line summary of your gem"
+gem.description = "longer description of your gem"
+</code></pre>
+
+<p><code>
+修改后再次执行命令`$ rake install `如果成功的话会出现提示消息:
+</code></p>
+
+<pre><code>Successfully built RubyGem
+</code></pre>
+
+<p>  Name: mrlic
+  Version: 0.1.0
+  File: mrlic-0.1.0.gem</p>
+
+<pre><code>Executing "ruby -S gem install ./pkg/mrlic-0.1.0.gem":
+ruby -S gem install ./pkg/mrlic-0.1.0.gem
+Successfully installed mrlic-0.1.0
+1 gem installed
+</code></pre>
+
+<p>```</p>
+
+<h1>测试</h1>
+
+<p>打开新的终端输入命令<code>$ pry</code>(<a href="pry.github.com">pry是一个非常好的命令交互工具</a>)<br/>
+```</p>
+
+<pre><code>[1] pry(main)&gt; require "mrlic"
+=&gt; true
+[2] pry(main)&gt; desc
+this is mrli command collect
+=&gt; nil
+[3] pry(main)&gt; 
+</code></pre>
+
+<p>```
+可见"mrlic"gem已经在本志安装好了</p>
+
+<h1>分享</h1>
+
+<p>下面我们把这个gem放到github上分享给大家</p>
+
+<ul>
+<li> 在github上新一个和"mrlic"相同命名项目(没有账号的就注册一个"<a href="http://www.github.com">http://www.github.com</a>")</li>
+<li> 回到项目文件中 $ cd ~/dev_study/mrlic</li>
+<li> git add .</li>
+<li> git commit -a -m &ldquo;init mrlic&rdquo;</li>
+<li> git pull (把刚才新建的项目pull下来和本地的合并)</li>
+<li> $ rake release (在发布的过程中会让你输入"rubygems"的账号,没有的就注册一个)</li>
+</ul>
+
+
+<p>执行命令<code>$ rake release</code>如果一切顺利的话会出现信息:
+```</p>
+
+<pre><code>    rm -r pkg/mrlic-0.1.0.gem
+    Committing mrlic.gemspec
+    Pushing master to origin
+    Tagging v0.1.0
+    Pushing v0.1.0 to origin
+    Generated: mrlic.gemspec
+    mrlic.gemspec is valid.
+      Successfully built RubyGem
+      Name: mrlic
+      Version: 0.1.0
+      File: mrlic-0.1.0.gem
+    Executing "gem push ./pkg/mrlic-0.1.0.gem":
+    gem push ./pkg/mrlic-0.1.0.gem
+    Enter your RubyGems.org credentials.
+    Don't have an account yet? Create one at http://rubygems.org/sign_up
+       Email:   lb563@foxmail.com
+    Password:  
+    Pushing gem to https://rubygems.org...
+    Signed in.
+    Pushing gem to https://rubygems.org...
+    Successfully registered gem: mrlic (0.1.0)
+</code></pre>
+
+<p>```
+到此你的gem已经发布到公网上,并可以让其它人使用了<br/>
+更多信息参考 <a href="https://github.com/technicalpickles/jeweler">jeweler</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pry学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/13/pryxue-xi/"/>
+    <updated>2012-05-13T00:15:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/13/pryxue-xi</id>
+    <content type="html"><![CDATA[<p>Pry是一种功能强大的专门用来替代ruby中脚本irb的工具。</p>
+
+<ul>
+<li>即时的查看源码的方法是怎么写的 (<code>edit-method Class#method</code>)</li>
+<li>调用系统的shell命令 (start editors, run git, and rake from within Pry)</li>
+<li>查看当前的状态 (<code>cd</code>, <code>ls</code> and friends)</li>
+<li>运行时的调试 (use Pry as a developer console or debugger)</li>
+</ul>
+
+
+<h3>安装 pry</h3>
+
+<pre><code>`$&gt; gem install pry`
+</code></pre>
+
+<h3>使用 pry</h3>
+
+<pre><code>`$&gt; pry`
+</code></pre>
+
+<h3>对我来说常用的命令</h3>
+
+<pre><code>.......
+</code></pre>
+
+<h3>更多</h3>
+
+<pre><code>更多信息请查看官方文档[pry](http://pry.github.com/)
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gon 学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/05/gon-xue-xi/"/>
+    <updated>2012-05-05T11:08:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/05/gon-xue-xi</id>
+    <content type="html"><![CDATA[<h3><strong>gon可以把controller中的变量传到js</strong></h3>
+
+<pre><code>the can get your Rails variables in your js  
+                             --form github
+</code></pre>
+
+<p>前些时间一直在找rails中有没有方法把action中的变量传到js文件中.<br/>
+确实google了一下可以用方式 &ldquo;xx.js.erb"这样的方式传值但是总觉得这样不是很方便而且效率也不是很高.<br/>
+于是又找了一下发现在<a href="http://railscasts.com/episodes/324-passing-data-to-javascript">railscast/passing-data-to-javascript</a>中有一期 &lsquo;<a href="https://github.com/gazay/gon">gon</a>&rsquo;
+可以满足我的需求,于是到官方网站中看了下.  感觉确实要用好的多只需要简单的一些数据绑定就可相互传值.</p>
+
+<p>下面是我用使用gem包的过程给大家分享出来:</p>
+
+<!--more-->
+
+
+<h2>安装(前提是你已经搭建好了rails的开发环境)</h2>
+
+<h4>先生成一个学习的项目</h4>
+
+<pre><code>执行命令: `$&gt; rails new gon_study`  
+
+在这里我不用生成新的学习项目,因为我在前几周中已经生成了一个学习'active_admin'的学习项目 
+
+并push到了github上面.为了不生成冗余的项目我就用这前的项目.如果你也有一个专门用于学习rails  
+
+的项目,那我建议你可以不用生成新的项目直接用之前的学习项目就行了.
+</code></pre>
+
+<h4>设置项目</h4>
+
+<pre><code>在rails项目中的 'Gemfile' 添加如下内容`gem 'gon', '3.0.2' `  
+
+然后执行命令: `$&gt; bundle install`  
+
+如果是你的rails版本比较的的早(2.3.x),那你需要这样做  
+
+在项目的 `config/environment.rb` 文件中添加内容`onfig.gem 'gon', :version =&gt; '3.0.2'`    
+
+然后执行命令: `$&gt;  rake gems:install`
+</code></pre>
+
+<h2>使用</h2>
+
+<p>这时我以我的项目为例子(你可以到<a href="https://github.com/mrli/active_admin_study">mrli</a>上面下载我的源码)</p>
+
+<h4>用编辑器找你的项目文件</h4>
+
+<p>  <code>$&gt; cd ~/dev_study/ruby_rails/active_admin_study</code></p>
+
+<p>  <code>$&gt; rails g controller gon_study index</code></p>
+
+<ol>
+<li><p> 打开 app_root/app/controller/gon_study_controllers.rb</p>
+
+<p>在action &lsquo;index&rsquo; 中添加测试数据 &lsquo;gon.gon_study = '这是一个学习gon的测试例子&rsquo;'</p>
+
+<p><code>app/views/layouts/application.html.erb</code></p>
+
+<p>``` erb
+<head>
+  <title>some title</title>
+  &lt;%= include_gon %>
+  <!-- include your action js code -->
+  &hellip;</p></li>
+<li><p> 在你的application.js文件用下面的方法就可以取到action中传过来的数据</p>
+
+<p>gon.gon_study</p></li>
+<li><p> 在我的这个例子中我在gon_study-> index 页面加了一个链接,然后点击后会弹出一个框<br/>
+这个框中的内容就是刚才从index中传过来的</p></li>
+</ol>
+
+
+<h4>官网的部分例子</h4>
+
+<p>你可以在你的action中如下使用gon:</p>
+
+<p>``` ruby
+@your_int = 123
+@your_array = [1,2]
+@your_hash = {&lsquo;a&rsquo; => 1, &lsquo;b&rsquo; => 2}
+gon.your_int = @your_int
+gon.your_other_int = 345 + gon.your_int
+gon.your_array = @your_array
+gon.your_array &lt;&lt; gon.your_int
+gon.your_hash = @your_hash</p>
+
+<p>gon.all_variables # > {:your_int => 123, :your_other_int => 468, :your_array => [1, 2, 123], :your_hash => {&lsquo;a&rsquo; => 1, &lsquo;b&rsquo; => 2}}
+gon.your_array # > [1, 2, 123]</p>
+
+<p>gon.clear # gon.all_variables now is {}
+```</p>
+
+<p>在js文件中取得传过来的数据:</p>
+
+<p><code>js
+alert(gon.your_int)
+alert(gon.your_other_int)
+alert(gon.your_array)
+alert(gon.your_hash)
+</code>
+<a href="https://github.com/gazay/gon">更多用法请参考官方文档&hellip;.</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Activeadmin学习]]></title>
+    <link href="http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin/"/>
+    <updated>2012-05-01T21:50:00+08:00</updated>
+    <id>http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin</id>
+    <content type="html"><![CDATA[<h2>是什么?</h2>
+
+<p>Active Admin 是一个用来创建管理数据的框架,通常对于开发都来说都是十分简单的.他提供了良好的接口和优美的界面<br/>
+让你只做一点点的配置就可以管理数据.</p>
+
+<h2>做什么?</h2>
+
+<ol>
+<li>让开发者快速的建立一个对数据具有强大管理功能的架构.<strong>不仅仅是(增删改查)</strong></li>
+<li>提供给开发者强大的DSL功能和接口</li>
+<li>确保开发人员可以轻松地定制的每一个实现的细节</li>
+<li>构建公共的接口做为可共享的gems,有整个社区的发展。</li>
+</ol>
+
+
+<h2>开始第一个简单开发之旅:</h2>
+
+<p>   这里我会做一个简单的例子,让大家来体会Active Admin 是怎么个方便,怎么个简单,怎么个好用.</p>
+
+<h5>安装必要的开发环境(我的是环境是:rails(3.2.2)+ruby(1.9.3))安装gem包:</h5>
+
+<p>  <code>$&gt; gem 'activeadmin'</code></p>
+
+<h5>新创建一个项目:</h5>
+
+<p>  <code>$&gt; rails new active_admin_study -d mysql  &amp;&amp; cd active_admin_study</code></p>
+
+<h5>在项目根目录中生成相应的配置 :</h5>
+
+<p>  打开项目中的Gemfile 然后加上内容</p>
+
+<pre><code># 修改为taobao的镜像(主要是安装gem的时候速度快)
+source 'http://ruby.taobao.org'
+
+# 基本设置
+gem 'rails', '3.2.3'
+gem 'mysql2',"0.3.11"
+
+# 管理数据的框架
+gem 'activeadmin',"0.4.3"
+
+# 用来调试程序(设断点等功能)
+gem "pry-rails","0.1.6"
+
+group :assets do
+  gem 'sass-rails',   '~&gt; 3.2.3'
+  gem 'coffee-rails', '~&gt; 3.2.1'
+  gem 'uglifier', '&gt;= 1.0.3'
+end
+
+gem 'jquery-rails'
+</code></pre>
+
+<p>  然后执行命令<code>$&gt; bundle install</code> or <code>$&gt; bundle</code>等bundle执行完毕后</p>
+
+<p>  <code>$&gt; rails generate active_admin:install</code></p>
+
+<pre><code>1: 可能在执行的过程中会出现一个&lt;strong&gt;找不到"active_admin_study"数据库
+  &lt;strong&gt;错误,处理方法是在自己的数据库中加一个名为"active_admin_study"的库 然后再次执行.
+
+2: 如果成功执行的话会给你很多的提示信息,然后你根据提示信息设置其目录
+</code></pre>
+
+<h4>修改初始化migrate中的数据:</h4>
+
+<p>   把初始化的默认用户修改为自己的用户名和密码也可以不用修改使用默认的</p>
+
+<pre><code>User: admin@example.com  
+Password: password  
+</code></pre>
+
+<h4>执行命令:</h4>
+
+<pre><code>$&gt; rake db:migrate
+
+$&gt; rails server
+</code></pre>
+
+<h4>访问服务:</h4>
+
+<p>   <a href="http://localhost:3000/admin">http://localhost:3000/admin</a></p>
+
+<p>   输入用户名和密码,如果能进去的话.说明你已经搭起了这个框架</p>
+
+<h2>管理数据</h2>
+
+<p>   这里我们来学习怎么来管理数据库表中的数据就把我们的"admin_user" 这张表来说吧.</p>
+
+<h4>执行命令:</h4>
+
+<p>  <code>$&gt; rails generate active_admin:resource AdminUser</code></p>
+
+<p>他会生成所有关于管理"AdminUser"的文件,是的再次刷新页面你会发现多了一个"admin_user"菜单,点击后就进行了相应的管理页面</p>
+
+<h2>完结</h2>
+
+<p>  是的就这么简单,不需要你做任何的复杂的操作就可以生成这么一个简单而方便的管理框架,当然这只是一个小小的一般需求.
+  还有很多特殊的需求我们也可以用这个来实现.你可以对比官方文档来使用,自定义等</p>
+
+<p>  在我做的项目中就自己定制了很多东西,包括页面的呈现,数据的组装等</p>
+
+<p>  我会把我的学习源码放到<a href="https://github.com/mrli/active_admin_study">mrli/github</a>你可以pull来直接使用</p>
+
+<h2>更多</h2>
+
+<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#108;&#x62;&#x35;&#54;&#x33;&#x40;&#x66;&#111;&#x78;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#108;&#x62;&#x35;&#x36;&#51;&#64;&#102;&#111;&#x78;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#109;</a>)<br/>
+  更多信息<a href="http://activeadmin.info/">active_admin</a></p>
+]]></content>
+  </entry>
+  
+</feed>

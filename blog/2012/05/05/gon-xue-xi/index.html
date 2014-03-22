@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Gon 学习 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="gon可以把controller中的变量传到js the can get your Rails variables in your js --form github 前些时间一直在找rails中有没有方法把action中的变量传到js文件中.
+确实google了一下可以用方式 &ldquo;xx. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mrli.github.io/blog/2012/05/05/gon-xue-xi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mrli.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Gon 学习</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-05T11:08:00+08:00" pubdate data-updated="true">May 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3><strong>gon可以把controller中的变量传到js</strong></h3>
+
+<pre><code>the can get your Rails variables in your js  
+                             --form github
+</code></pre>
+
+<p>前些时间一直在找rails中有没有方法把action中的变量传到js文件中.<br/>
+确实google了一下可以用方式 &ldquo;xx.js.erb&#8221;这样的方式传值但是总觉得这样不是很方便而且效率也不是很高.<br/>
+于是又找了一下发现在<a href="http://railscasts.com/episodes/324-passing-data-to-javascript">railscast/passing-data-to-javascript</a>中有一期 &lsquo;<a href="https://github.com/gazay/gon">gon</a>&rsquo;
+可以满足我的需求,于是到官方网站中看了下.  感觉确实要用好的多只需要简单的一些数据绑定就可相互传值.</p>
+
+<p>下面是我用使用gem包的过程给大家分享出来:</p>
+
+<!--more-->
+
+
+<h2>安装(前提是你已经搭建好了rails的开发环境)</h2>
+
+<h4>先生成一个学习的项目</h4>
+
+<pre><code>执行命令: `$&gt; rails new gon_study`  
+
+在这里我不用生成新的学习项目,因为我在前几周中已经生成了一个学习'active_admin'的学习项目 
+
+并push到了github上面.为了不生成冗余的项目我就用这前的项目.如果你也有一个专门用于学习rails  
+
+的项目,那我建议你可以不用生成新的项目直接用之前的学习项目就行了.
+</code></pre>
+
+<h4>设置项目</h4>
+
+<pre><code>在rails项目中的 'Gemfile' 添加如下内容`gem 'gon', '3.0.2' `  
+
+然后执行命令: `$&gt; bundle install`  
+
+如果是你的rails版本比较的的早(2.3.x),那你需要这样做  
+
+在项目的 `config/environment.rb` 文件中添加内容`onfig.gem 'gon', :version =&gt; '3.0.2'`    
+
+然后执行命令: `$&gt;  rake gems:install`
+</code></pre>
+
+<h2>使用</h2>
+
+<p>这时我以我的项目为例子(你可以到<a href="https://github.com/mrli/active_admin_study">mrli</a>上面下载我的源码)</p>
+
+<h4>用编辑器找你的项目文件</h4>
+
+<p>  <code>$&gt; cd ~/dev_study/ruby_rails/active_admin_study</code></p>
+
+<p>  <code>$&gt; rails g controller gon_study index</code></p>
+
+<ol>
+<li><p> 打开 app_root/app/controller/gon_study_controllers.rb</p>
+
+<p>在action &lsquo;index&rsquo; 中添加测试数据 &lsquo;gon.gon_study = &#8216;这是一个学习gon的测试例子&rsquo;&#8217;</p>
+
+<p><code>app/views/layouts/application.html.erb</code></p>
+
+<p>&#8220;` erb
+<head>
+  <title>some title</title>
+  &lt;%= include_gon %>
+  <!-- include your action js code -->
+  &hellip;</p></li>
+<li><p> 在你的application.js文件用下面的方法就可以取到action中传过来的数据</p>
+
+<p>gon.gon_study</p></li>
+<li><p> 在我的这个例子中我在gon_study-> index 页面加了一个链接,然后点击后会弹出一个框<br/>
+这个框中的内容就是刚才从index中传过来的</p></li>
+</ol>
+
+
+<h4>官网的部分例子</h4>
+
+<p>你可以在你的action中如下使用gon:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@your_int</span> <span class="o">=</span> <span class="mi">123</span>
+</span><span class='line'><span class="vi">@your_array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">]</span>
+</span><span class='line'><span class="vi">@your_hash</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">your_int</span> <span class="o">=</span> <span class="vi">@your_int</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">your_other_int</span> <span class="o">=</span> <span class="mi">345</span> <span class="o">+</span> <span class="n">gon</span><span class="o">.</span><span class="n">your_int</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">your_array</span> <span class="o">=</span> <span class="vi">@your_array</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">your_array</span> <span class="o">&lt;&lt;</span> <span class="n">gon</span><span class="o">.</span><span class="n">your_int</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">your_hash</span> <span class="o">=</span> <span class="vi">@your_hash</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">all_variables</span> <span class="c1"># &gt; {:your_int =&gt; 123, :your_other_int =&gt; 468, :your_array =&gt; [1, 2, 123], :your_hash =&gt; {&#39;a&#39; =&gt; 1, &#39;b&#39; =&gt; 2}}</span>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">your_array</span> <span class="c1"># &gt; [1, 2, 123]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gon</span><span class="o">.</span><span class="n">clear</span> <span class="c1"># gon.all_variables now is {}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在js文件中取得传过来的数据:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">gon</span><span class="p">.</span><span class="nx">your_int</span><span class="p">)</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">gon</span><span class="p">.</span><span class="nx">your_other_int</span><span class="p">)</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">gon</span><span class="p">.</span><span class="nx">your_array</span><span class="p">)</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">gon</span><span class="p">.</span><span class="nx">your_hash</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/gazay/gon">更多用法请参考官方文档&hellip;.</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-05T11:08:00+08:00" pubdate data-updated="true">May 5<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gems/'>Gems</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2012/05/05/gon-xue-xi/" data-via="" data-counturl="http://mrli.github.io/blog/2012/05/05/gon-xue-xi/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/01/xue-xi-active-admin/" title="Previous Post: activeadmin学习">&laquo; activeadmin学习</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/13/pryxue-xi/" title="Next Post: pry学习">pry学习 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/">Ubuntu 搭建rails 开发环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/20/backup-xue-xi/">Backup 学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/19/jewelerxue-xi/">Jeweler学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/13/pryxue-xi/">Pry学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/05/gon-xue-xi/">Gon 学习</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/mrli">@mrli</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'mrli',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

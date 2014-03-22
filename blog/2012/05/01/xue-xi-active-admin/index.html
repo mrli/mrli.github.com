@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Activeadmin学习 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="是什么? Active Admin 是一个用来创建管理数据的框架,通常对于开发都来说都是十分简单的.他提供了良好的接口和优美的界面
+让你只做一点点的配置就可以管理数据. 做什么? 让开发者快速的建立一个对数据具有强大管理功能的架构.不仅仅是(增删改查)
+提供给开发者强大的DSL功能和接口 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mrli.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Activeadmin学习</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-01T21:50:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>是什么?</h2>
+
+<p>Active Admin 是一个用来创建管理数据的框架,通常对于开发都来说都是十分简单的.他提供了良好的接口和优美的界面<br/>
+让你只做一点点的配置就可以管理数据.</p>
+
+<h2>做什么?</h2>
+
+<ol>
+<li>让开发者快速的建立一个对数据具有强大管理功能的架构.<strong>不仅仅是(增删改查)</strong></li>
+<li>提供给开发者强大的DSL功能和接口</li>
+<li>确保开发人员可以轻松地定制的每一个实现的细节</li>
+<li>构建公共的接口做为可共享的gems,有整个社区的发展。</li>
+</ol>
+
+
+<h2>开始第一个简单开发之旅:</h2>
+
+<p>   这里我会做一个简单的例子,让大家来体会Active Admin 是怎么个方便,怎么个简单,怎么个好用.</p>
+
+<h5>安装必要的开发环境(我的是环境是:rails(3.2.2)+ruby(1.9.3))安装gem包:</h5>
+
+<p>  <code>$&gt; gem 'activeadmin'</code></p>
+
+<h5>新创建一个项目:</h5>
+
+<p>  <code>$&gt; rails new active_admin_study -d mysql  &amp;&amp; cd active_admin_study</code></p>
+
+<h5>在项目根目录中生成相应的配置 :</h5>
+
+<p>  打开项目中的Gemfile 然后加上内容</p>
+
+<pre><code># 修改为taobao的镜像(主要是安装gem的时候速度快)
+source 'http://ruby.taobao.org'
+
+# 基本设置
+gem 'rails', '3.2.3'
+gem 'mysql2',"0.3.11"
+
+# 管理数据的框架
+gem 'activeadmin',"0.4.3"
+
+# 用来调试程序(设断点等功能)
+gem "pry-rails","0.1.6"
+
+group :assets do
+  gem 'sass-rails',   '~&gt; 3.2.3'
+  gem 'coffee-rails', '~&gt; 3.2.1'
+  gem 'uglifier', '&gt;= 1.0.3'
+end
+
+gem 'jquery-rails'
+</code></pre>
+
+<p>  然后执行命令<code>$&gt; bundle install</code> or <code>$&gt; bundle</code>等bundle执行完毕后</p>
+
+<p>  <code>$&gt; rails generate active_admin:install</code></p>
+
+<pre><code>1: 可能在执行的过程中会出现一个&lt;strong&gt;找不到"active_admin_study"数据库
+  &lt;strong&gt;错误,处理方法是在自己的数据库中加一个名为"active_admin_study"的库 然后再次执行.
+
+2: 如果成功执行的话会给你很多的提示信息,然后你根据提示信息设置其目录
+</code></pre>
+
+<h4>修改初始化migrate中的数据:</h4>
+
+<p>   把初始化的默认用户修改为自己的用户名和密码也可以不用修改使用默认的</p>
+
+<pre><code>User: admin@example.com  
+Password: password  
+</code></pre>
+
+<h4>执行命令:</h4>
+
+<pre><code>$&gt; rake db:migrate
+
+$&gt; rails server
+</code></pre>
+
+<h4>访问服务:</h4>
+
+<p>   <a href="http://localhost:3000/admin">http://localhost:3000/admin</a></p>
+
+<p>   输入用户名和密码,如果能进去的话.说明你已经搭起了这个框架</p>
+
+<h2>管理数据</h2>
+
+<p>   这里我们来学习怎么来管理数据库表中的数据就把我们的&#8221;admin_user&#8221; 这张表来说吧.</p>
+
+<h4>执行命令:</h4>
+
+<p>  <code>$&gt; rails generate active_admin:resource AdminUser</code></p>
+
+<p>他会生成所有关于管理&#8221;AdminUser&#8221;的文件,是的再次刷新页面你会发现多了一个&#8221;admin_user&#8221;菜单,点击后就进行了相应的管理页面</p>
+
+<h2>完结</h2>
+
+<p>  是的就这么简单,不需要你做任何的复杂的操作就可以生成这么一个简单而方便的管理框架,当然这只是一个小小的一般需求.
+  还有很多特殊的需求我们也可以用这个来实现.你可以对比官方文档来使用,自定义等</p>
+
+<p>  在我做的项目中就自己定制了很多东西,包括页面的呈现,数据的组装等</p>
+
+<p>  我会把我的学习源码放到<a href="https://github.com/mrli/active_admin_study">mrli/github</a>你可以pull来直接使用</p>
+
+<h2>更多</h2>
+
+<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x6c;&#98;&#53;&#x36;&#51;&#x40;&#x66;&#x6f;&#x78;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;">&#108;&#x62;&#53;&#x36;&#51;&#64;&#102;&#x6f;&#120;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a>)<br/>
+  更多信息<a href="http://activeadmin.info/">active_admin</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-01T21:50:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gems/'>Gems</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin/" data-via="" data-counturl="http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/05/05/gon-xue-xi/" title="Next Post: gon 学习">gon 学习 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/">Ubuntu 搭建rails 开发环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/20/backup-xue-xi/">Backup 学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/19/jewelerxue-xi/">Jeweler学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/13/pryxue-xi/">Pry学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/05/gon-xue-xi/">Gon 学习</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/mrli">@mrli</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'mrli',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

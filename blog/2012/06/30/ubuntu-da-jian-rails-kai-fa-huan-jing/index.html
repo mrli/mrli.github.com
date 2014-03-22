@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ubuntu 搭建rails 开发环境 - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括: nginx,passenger,mysql,imagemagick,mongodb etc 等一些常用工具的安装和调试.
+下面我把自己搭建的过程给分享出来,希望对你有用. 修改终端的语言 sudo nano /etc/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mrli.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ubuntu 搭建rails 开发环境</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T23:07:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括:</h3>
+
+<p>nginx,passenger,mysql,imagemagick,mongodb etc 等一些常用工具的安装和调试.<br/>
+下面我把自己搭建的过程给分享出来,希望对你有用.</p>
+
+<h2>修改终端的语言</h2>
+
+<pre><code>sudo nano /etc/default/locale1
+</code></pre>
+
+<p>  修改默认的</p>
+
+<pre><code>LANG=zh_CN.UTF-8
+LANGUAGE=zh_CN:zh
+</code></pre>
+
+<p>  为:</p>
+
+<pre><code>LANG="en_US.UTF-8"
+LANGUAGE="en_US:en"
+</code></pre>
+
+<h2>下载并安装ruby</h2>
+
+<pre><code>sudo apt-get remove --purge ruby1.8 #   删除原来的ruby1.8
+
+* mkidr -p /opt/tools &amp;&amp; cd /opt/tools &amp;&amp; wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p194.tar.gz 
+
+tar -xvf ruby-1.9.3-p194.tar.gz &amp;&amp; ./configure  --prefix=/opt/ruby &amp;&amp; make &amp;&amp; make install
+
+nano ~/.bash_profile 添加内容 export PATH=/opt/ruby/bin:$PATH  # 把编译的ruby 加到环境变量中去让系统使用手动编译的ruby
+
+source ~/.bash_profile  ( . ~/.bash_profile) # 使刚才修改的变量生效
+</code></pre>
+
+<h2>下载并安装mongodb:</h2>
+
+<p><strong>mongodb用来存关系性数据非常方便,什么是关系性数据?类似于我可以在一个字段中存一个数组,一个hash,甚至一个对象等</strong></p>
+
+<pre><code>cd /opt/tools &amp;&amp; wget http://fastdl.mongodb.org/linux/ongodb-linux-x86_64-2.0.6.tgz 
+
+tar -xvf mongodb-linux-x86_64-2.0.6.tgz &amp;&amp; mv mongodb-linux-x86_64-2.0.6 ../mongodb 
+
+mkdir -p /opt/mongodb/db /opt/mongodb/log &amp;&amp; touch /opt/mongodb/log/mongo.log       #创建mongodb所依赖的文件 
+
+sudo mkdir -p /data/db &amp;&amp; sudo chown -R cici:cici /data/db # 生成一个数据存放的目录必须的
+
+sudo nano /etc/rc.local ==&gt; /opt/mongodb/bin/mongod --fork --dbpath=/opt/mongodb/db     -   -logpath=/opt/mongodb/log/mongo.log #把mongodb 开机自起服务开起来
+
+nano ~/.bash_profile 修改内容为 export PATH=/opt/ruby/bin:/opt/mongodb/bin:$PATH  #        把mongodb加到环境
+* source ~/.bash_profile  ( . ~/.bash_profile) # 使刚才修改的变量生效
+</code></pre>
+
+<h2>以下内容中涉及到的库和安装包是通过ftp的方式上传到你本机的(如果你在测试中没有找到库,那你就到网上去下载对应的包就行了)</h2>
+
+<h3>安装imagemagick(用于处理图片)</h3>
+
+<pre><code>* cd /opt/tools &amp;&amp; tar -xvf imagemagick-6.7.1-1.tgz &amp;&amp; cd trevor-ImageMagick-e035047
+
+* ./configure --prefix=/usr --with-bzlib=yes --with-fontconfig=yes --with-freetype=yes  
+--with-gslib=yes --with-gvc=yes --with-jpeg=yes --with-jp2=yes --with-png=yes --with-   
+tiff=yes 
+
+* make &amp;&amp; sudo make install 
+
+* convert --version #如果出现了提示符号就说明已经安装好了. 
+</code></pre>
+
+<h3>安装nginx(用于处理服务请求)</h3>
+
+<pre><code>* gem install passenger  -v 3.0.12
+
+* passenger-install-nginx-module
+    期间会出现各种库文件的找不到,按照nginx安装教程的指导就可以解决.这里记录一个比较难的问题
+    To install OpenSSL support for Ruby:
+    Please run apt-get install libopenssl-ruby as root.
+
+* cd /opt/tools/ruby-1.9.3-p194/ext/openssl &amp;&amp; ruby extconf.rb &amp;&amp; make &amp;&amp; make install
+
+* passenger-install-nginx-module #按照提示再次安装 
+
+* nano ~/.bash_profile 修改内容为 export PATH=/opt/ruby/bin:/opt/mongodb/bin:/opt/nginx/sbin:$PATH  # 把mongodb加到环境
+
+
+* source ~/.bash_profile  ( . ~/.bash_profile) # 使刚才修改的变量生效
+
+* mkdir -p include /opt/nginx/conf/sites-enabled #用于放置我们的配置文件
+
+* nano /opt/nginx/conf/nginx.conf 添加内容" include /opt/nginx/conf/sites-  
+enabled/*"到最后一行:
+
+* sudo cp /opt/tools/for_centos/nginxd /etc/init.d/nginxd #把nginx的开机启动脚本加到init. 
+d中
+
+* sudo chmod +x /etc/init.d/nginxd #使之成为可执行文件 
+</code></pre>
+
+<h3>安装 mysql (参考:<a href="https://help.ubuntu.com/8.04/serverguide/mysql.html%EF%BC%89">https://help.ubuntu.com/8.04/serverguide/mysql.html%EF%BC%89</a></h3>
+
+<pre><code>* sudo apt-get install mysql-server 
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-30T23:07:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/huan-jing-da-jian/'>环境搭建</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/" data-via="" data-counturl="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/05/20/backup-xue-xi/" title="Previous Post: backup 学习">&laquo; backup 学习</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/">Ubuntu 搭建rails 开发环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/20/backup-xue-xi/">Backup 学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/19/jewelerxue-xi/">Jeweler学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/13/pryxue-xi/">Pry学习</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/05/gon-xue-xi/">Gon 学习</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/mrli">@mrli</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'mrli',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
