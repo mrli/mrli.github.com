@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Pry学习 - Lioooo</title>
+  <title>Puppet 的环境搭建及使用 - Lioooo</title>
   <meta name="author" content="lioooo">
 
   
-  <meta name="description" content="Pry是一种功能强大的专门用来替代ruby中脚本irb的工具。 即时的查看源码的方法是怎么写的 (edit-method Class#method)
-调用系统的shell命令 (start editors, run git, and rake from within Pry)
-查看当前的状态 ( &hellip;">
+  <meta name="description" content="软件包的安装 puppet 的安装有多种方式,这里使用yum的方式安装 首先安装ruby环境Ruby的安装 安装puppet sudo yum install -y puppet-server puppet Yum 安装Puppet 检查是否安装成功 ruby -v ; puppet -- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mrli.github.io/blog/2012/05/13/pryxue-xi">
+  <link rel="canonical" href="http://mrli.github.io/blog/2014/03/02/puppet-study">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Lioooo" type="application/atom+xml">
@@ -70,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Pry学习</h1>
+      <h1 class="entry-title">Puppet 的环境搭建及使用</h1>
     
     
       <p class="meta">
@@ -86,42 +84,76 @@
   
 
 
-<time datetime="2012-05-13T00:15:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2014-03-02T16:44:10+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Pry是一种功能强大的专门用来替代ruby中脚本irb的工具。</p>
+<div class="entry-content"><h5>软件包的安装</h5>
 
-<ul>
-<li>即时的查看源码的方法是怎么写的 (<code>edit-method Class#method</code>)</li>
-<li>调用系统的shell命令 (start editors, run git, and rake from within Pry)</li>
-<li>查看当前的状态 (<code>cd</code>, <code>ls</code> and friends)</li>
-<li>运行时的调试 (use Pry as a developer console or debugger)</li>
-</ul>
+<p>  <strong><em>puppet 的安装有多种方式,这里使用yum的方式安装</em></strong></p>
+
+<ol>
+<li><p> 首先安装ruby环境<a href="https://www.ruby-lang.org/en/installation/">Ruby的安装</a></p></li>
+<li><p> 安装puppet  <code>sudo yum install -y puppet-server puppet</code> <a href="http://docs.puppetlabs.com/guides/installation.html#red-hat-enterprise-linux-and-derivatives">Yum 安装Puppet</a></p></li>
+<li><p> 检查是否安装成功 <code>ruby -v ; puppet --version</code> 若输出版本号表明安装成功</p></li>
+</ol>
 
 
-<h3>安装 pry</h3>
+<p> <strong><em>puppet 的安装有多种方式,这里使用ruby的gem包的方式安装</em></strong></p>
 
-<pre><code>`$&gt; gem install pry`
-</code></pre>
+<ol>
+<li><p> 首先安装ruby环境 <code>brew install ruby</code> <a href="https://www.ruby-lang.org/en/installation/">Ruby的安装</a></p>
 
-<h3>使用 pry</h3>
+<p>1.1 安装puppet所依赖的第三方包 <code>gem install ruby-shadow -v 2.3.2</code></p></li>
+<li><p> 安装puppet gem <code>gem install puppet -v 3.4.0</code> <a href="http://docs.puppetlabs.com/guides/installation.html">Puppet 的安装</a></p></li>
+<li><p> 检查是否安装成功 <code>ruby -v ; puppet --version</code> 若输出版本号表明安装成功</p></li>
+</ol>
 
-<pre><code>`$&gt; pry`
-</code></pre>
 
-<h3>对我来说常用的命令</h3>
+<hr />
 
-<pre><code>.......
-</code></pre>
+<h5>生成puppet的配置文件</h5>
 
-<h3>更多</h3>
+<p>文章参考: <a href="http://docs.puppetlabs.com/guides/installation.html#mac-os-x">Gem 安装puppet的设置</a></p>
 
-<pre><code>更多信息请查看官方文档[pry](http://pry.github.com/)
-</code></pre>
+<ol>
+<li><p>新建文件目录 <code>sudo mkdir -p /etc/puppet</code></p></li>
+<li><p>拷贝puppet源目录中的: <code>cp sudo cp /usr/local/lib/ruby/gems/1.9.1/gems/puppet-3.4.0/conf/auth.conf /etc/puppet/</code></p></li>
+<li><p>新建puppet的主配置文件 <code>sudo touch /etc/puppet/puppet.conf</code></p></li>
+<li><p>打开puppet master 的<strong><em>8140</em></strong>端口: <code>sudo vi /etc/sysconfig/iptables</code> 添加如下内容, <strong><em>-A INPUT -m state &mdash;state NEW -m tcp -p tcp &mdash;dport 8140 -j ACCEPT</em></strong></p></li>
+</ol>
+
+
+<hr />
+
+<h5>设置puppet</h5>
+
+<p><a href="http://docs.puppetlabs.com/guides/configuring.html">官方配置文档</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Master: 192.168.1.116 =&gt; master.puppet.org
+</span><span class='line'>Agent : 192.168.1.117 =&gt; agent001.puppet.org
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>设置puppet master 服务器</p>
+
+<p> 1.1 修改服务器端的host方便记忆和阅读 <code>sudo echo 'HOSTNAME=master.puppet.org' &gt;&gt; /etc/sysconfig/network</code></p>
+
+<p> 1.2 添加一个测试文件,修改<strong><em>site.pp</em></strong> <code>sudo vi /etc/puppet/manifests/site.pp</code></p>
+
+<p> <strong><em> node default{file{&ldquo;/tmp/agent001-puppet-org.txt&rdquo;:content=>&ldquo;this is agent001.puppet.org test file&rdquo;;}}</em></strong></p></li>
+</ol>
+
+
+<h5>其它</h5>
 </div>
 
 
@@ -144,12 +176,12 @@
   
 
 
-<time datetime="2012-05-13T00:15:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2014-03-02T16:44:10+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/gems/'>Gems</a>
+    <a class='category' href='/blog/categories/linux-yun-wei/'>Linux,运维</a>
   
 </span>
 
@@ -158,7 +190,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2012/05/13/pryxue-xi/" data-via="" data-counturl="http://mrli.github.io/blog/2012/05/13/pryxue-xi/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2014/03/02/puppet-study/" data-via="" data-counturl="http://mrli.github.io/blog/2014/03/02/puppet-study/" >Tweet</a>
   
   
   
@@ -167,10 +199,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/05/gon-xue-xi/" title="Previous Post: gon 学习">&laquo; gon 学习</a>
+        <a class="basic-alignment left" href="/blog/2014/02/19/others/" title="Previous Post: 杂项记录">&laquo; 杂项记录</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/05/19/jewelerxue-xi/" title="Next Post: jeweler学习">jeweler学习 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/03/05/virtualbox-no-ip-config-issue/" title="Next Post: 克隆Virtualbox虚拟机后无Ip的解决方案">克隆Virtualbox虚拟机后无Ip的解决方案 &raquo;</a>
       
     </p>
   </footer>

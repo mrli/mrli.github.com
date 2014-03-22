@@ -5,13 +5,23 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Pry学习 - Lioooo</title>
+  <title>RubySocket 编程例子 - Lioooo</title>
   <meta name="author" content="lioooo">
 
   
-  <meta name="description" content="Pry是一种功能强大的专门用来替代ruby中脚本irb的工具。 即时的查看源码的方法是怎么写的 (edit-method Class#method)
-调用系统的shell命令 (start editors, run git, and rake from within Pry)
-查看当前的状态 ( &hellip;">
+  <meta name="description" content="Ruby 的 Socket 类在默认情况下并不会被载入,它需要使用 require&#8217;socket&#8217; 导入.
+其中包括了各种用于TCP套接字、UDP套接字的类,以及必要的基本类型。 服务器部分
+server.rb 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+require ' &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mrli.github.io/blog/2012/05/13/pryxue-xi">
+  <link rel="canonical" href="http://mrli.github.io/blog/2014/03/10/ruby-socket-study">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Lioooo" type="application/atom+xml">
@@ -70,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Pry学习</h1>
+      <h1 class="entry-title">RubySocket 编程例子</h1>
     
     
       <p class="meta">
@@ -86,42 +96,85 @@
   
 
 
-<time datetime="2012-05-13T00:15:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2014-03-10T16:43:24+08:00" pubdate data-updated="true">Mar 10<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Pry是一种功能强大的专门用来替代ruby中脚本irb的工具。</p>
+<div class="entry-content"><p>Ruby 的 Socket 类在默认情况下并不会被载入,它需要使用 require&#8217;socket&#8217; 导入.
+其中包括了各种用于TCP套接字、UDP套接字的类,以及必要的基本类型。</p>
 
-<ul>
-<li>即时的查看源码的方法是怎么写的 (<code>edit-method Class#method</code>)</li>
-<li>调用系统的shell命令 (start editors, run git, and rake from within Pry)</li>
-<li>查看当前的状态 (<code>cd</code>, <code>ls</code> and friends)</li>
-<li>运行时的调试 (use Pry as a developer console or debugger)</li>
-</ul>
+<p><strong>服务器部分</strong>
+server.rb</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'socket'
+</span><span class='line'>
+</span><span class='line'>server = TCPServer.new 2000 # Server bound to port 2000
+</span><span class='line'>
+</span><span class='line'>loop do
+</span><span class='line'>  client = server.accept    # Wait for a client to connect
+</span><span class='line'>  client.puts "Hello !"
+</span><span class='line'>  client.puts "Time is #{Time.now}"
+</span><span class='line'>  client.close
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>安装 pry</h3>
+<p><strong>客户端部分</strong>
+client.rb</p>
 
-<pre><code>`$&gt; gem install pry`
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'socket'
+</span><span class='line'>
+</span><span class='line'>s = TCPSocket.new 'localhost', 2000
+</span><span class='line'>
+</span><span class='line'>while line = s.gets # Read lines from socket
+</span><span class='line'>  puts line         # and print them
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>s.close             # close socket when done</span></code></pre></td></tr></table></div></figure>
 
-<h3>使用 pry</h3>
 
-<pre><code>`$&gt; pry`
-</code></pre>
+<p><strong>分别运行脚本输出:</strong></p>
 
-<h3>对我来说常用的命令</h3>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Hello !
+</span><span class='line'>Time is 2014-03-11 01:08:18 +0800</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>.......
-</code></pre>
 
-<h3>更多</h3>
+<p><strong>端口绑定的注意事项</strong></p>
 
-<pre><code>更多信息请查看官方文档[pry](http://pry.github.com/)
-</code></pre>
+<h5>规 则 1 : 不 要 使 用 0~1024 之 间 的 端 口</h5>
+
+<p>这 些 端 口 是 作 为 熟 知(well-known)端口并保留给系统使用的。例如HTTP默认使用端口80,SMTP默认使用端口25,rsync默认使用端口873。绑定到这些端口通常需要root权限。</p>
+
+<h5>规 则 2 : 不 要 使 用 49 000~65 535 之 间 的 端 口</h5>
+
+<p>这 些 都 是 临 时(ephemeral )端口 。通常是由那些不需要运行在预定义端口,而只是需要一些端口作为临时之需的服务使用。它们也是后面所要讲到的连接协商(connection negotiation)过程的一部分。选择该范围内的端口可能会对一些用户造成麻烦。除此之外,</p>
+
+<h5>建议使用1025~48 999之间的端口</h5>
+
+<p>需要注意的是：如果你打算选用其中的一个作为服务器端口,那你应该看一下IANA的注册端口列表1,确保你的选择不会和其他流行的服务器冲突。</p>
 </div>
 
 
@@ -144,12 +197,12 @@
   
 
 
-<time datetime="2012-05-13T00:15:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
+<time datetime="2014-03-10T16:43:24+08:00" pubdate data-updated="true">Mar 10<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/gems/'>Gems</a>
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
   
 </span>
 
@@ -158,7 +211,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2012/05/13/pryxue-xi/" data-via="" data-counturl="http://mrli.github.io/blog/2012/05/13/pryxue-xi/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2014/03/10/ruby-socket-study/" data-via="" data-counturl="http://mrli.github.io/blog/2014/03/10/ruby-socket-study/" >Tweet</a>
   
   
   
@@ -167,10 +220,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/05/05/gon-xue-xi/" title="Previous Post: gon 学习">&laquo; gon 学习</a>
+        <a class="basic-alignment left" href="/blog/2014/03/05/virtualbox-no-ip-config-issue/" title="Previous Post: 克隆Virtualbox虚拟机后无Ip的解决方案">&laquo; 克隆Virtualbox虚拟机后无Ip的解决方案</a>
       
       
-        <a class="basic-alignment right" href="/blog/2012/05/19/jewelerxue-xi/" title="Next Post: jeweler学习">jeweler学习 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/03/25/install-docker/" title="Next Post: Docker的安装和使用">Docker的安装和使用 &raquo;</a>
       
     </p>
   </footer>

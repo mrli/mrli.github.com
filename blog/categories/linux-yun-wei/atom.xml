@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux,运维 | Lioooo]]></title>
+  <link href="http://mrli.github.io/blog/categories/linux-yun-wei/atom.xml" rel="self"/>
+  <link href="http://mrli.github.io/"/>
+  <updated>2014-03-22T16:49:32+08:00</updated>
+  <id>http://mrli.github.io/</id>
+  <author>
+    <name><![CDATA[lioooo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Puppet 的环境搭建及使用]]></title>
+    <link href="http://mrli.github.io/blog/2014/03/02/puppet-study/"/>
+    <updated>2014-03-02T16:44:10+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/03/02/puppet-study</id>
+    <content type="html"><![CDATA[<h5>软件包的安装</h5>
+
+<p>  <strong><em>puppet 的安装有多种方式,这里使用yum的方式安装</em></strong></p>
+
+<ol>
+<li><p> 首先安装ruby环境<a href="https://www.ruby-lang.org/en/installation/">Ruby的安装</a></p></li>
+<li><p> 安装puppet  <code>sudo yum install -y puppet-server puppet</code> <a href="http://docs.puppetlabs.com/guides/installation.html#red-hat-enterprise-linux-and-derivatives">Yum 安装Puppet</a></p></li>
+<li><p> 检查是否安装成功 <code>ruby -v ; puppet --version</code> 若输出版本号表明安装成功</p></li>
+</ol>
+
+
+<p> <strong><em>puppet 的安装有多种方式,这里使用ruby的gem包的方式安装</em></strong></p>
+
+<ol>
+<li><p> 首先安装ruby环境 <code>brew install ruby</code> <a href="https://www.ruby-lang.org/en/installation/">Ruby的安装</a></p>
+
+<p>1.1 安装puppet所依赖的第三方包 <code>gem install ruby-shadow -v 2.3.2</code></p></li>
+<li><p> 安装puppet gem <code>gem install puppet -v 3.4.0</code> <a href="http://docs.puppetlabs.com/guides/installation.html">Puppet 的安装</a></p></li>
+<li><p> 检查是否安装成功 <code>ruby -v ; puppet --version</code> 若输出版本号表明安装成功</p></li>
+</ol>
+
+
+<hr />
+
+<h5>生成puppet的配置文件</h5>
+
+<p>文章参考: <a href="http://docs.puppetlabs.com/guides/installation.html#mac-os-x">Gem 安装puppet的设置</a></p>
+
+<ol>
+<li><p>新建文件目录 <code>sudo mkdir -p /etc/puppet</code></p></li>
+<li><p>拷贝puppet源目录中的: <code>cp sudo cp /usr/local/lib/ruby/gems/1.9.1/gems/puppet-3.4.0/conf/auth.conf /etc/puppet/</code></p></li>
+<li><p>新建puppet的主配置文件 <code>sudo touch /etc/puppet/puppet.conf</code></p></li>
+<li><p>打开puppet master 的<strong><em>8140</em></strong>端口: <code>sudo vi /etc/sysconfig/iptables</code> 添加如下内容, <strong><em>-A INPUT -m state &mdash;state NEW -m tcp -p tcp &mdash;dport 8140 -j ACCEPT</em></strong></p></li>
+</ol>
+
+
+<hr />
+
+<h5>设置puppet</h5>
+
+<p><a href="http://docs.puppetlabs.com/guides/configuring.html">官方配置文档</a></p>
+
+<p>```</p>
+
+<p>Master: 192.168.1.116 => master.puppet.org
+Agent : 192.168.1.117 => agent001.puppet.org</p>
+
+<p>```</p>
+
+<ol>
+<li><p>设置puppet master 服务器</p>
+
+<p> 1.1 修改服务器端的host方便记忆和阅读 <code>sudo echo 'HOSTNAME=master.puppet.org' &gt;&gt; /etc/sysconfig/network</code></p>
+
+<p> 1.2 添加一个测试文件,修改<strong><em>site.pp</em></strong> <code>sudo vi /etc/puppet/manifests/site.pp</code></p>
+
+<p> <strong><em> node default{file{&ldquo;/tmp/agent001-puppet-org.txt&rdquo;:content=>&ldquo;this is agent001.puppet.org test file&rdquo;;}}</em></strong></p></li>
+</ol>
+
+
+<h5>其它</h5>
+]]></content>
+  </entry>
+  
+</feed>

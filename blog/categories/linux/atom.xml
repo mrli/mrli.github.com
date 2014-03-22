@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | Lioooo]]></title>
+  <link href="http://mrli.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://mrli.github.io/"/>
+  <updated>2014-03-22T16:49:32+08:00</updated>
+  <id>http://mrli.github.io/</id>
+  <author>
+    <name><![CDATA[lioooo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Docker的安装和使用]]></title>
+    <link href="http://mrli.github.io/blog/2014/03/25/install-docker/"/>
+    <updated>2014-03-25T16:35:37+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/03/25/install-docker</id>
+    <content type="html"><![CDATA[<h4>Docker的安装</h4>
+
+<p>Docker 是现在比较火的工具 <a href="http://www.oschina.net/search?scope=project&amp;q=docker">具体介绍</a>
+下面记录在<a href="http://www.oschina.net/search?scope=project&amp;q=virtualbox">virtualboxVM</a>中的安装步骤 <a href="http://docs.docker.io/en/latest/installation/rhel/">Install Docker</a></p>
+
+<ol>
+<li><p>若没有安装过docker: <code>sudo yum -y install docker-io</code></p></li>
+<li><p>若安装过docker: <code>sudo yum -y update docker-io</code></p></li>
+<li><p>启动docker服务: <code>sudo service docker start</code></p></li>
+<li><p>设置docker开机自启: <code>sudo chkconfig docker on</code></p></li>
+<li><p>测试并克隆centos到docker中: <code>sudo docker run -i -t centos /bin/bash</code></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[克隆Virtualbox虚拟机后无Ip的解决方案]]></title>
+    <link href="http://mrli.github.io/blog/2014/03/05/virtualbox-no-ip-config-issue/"/>
+    <updated>2014-03-05T16:41:19+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/03/05/virtualbox-no-ip-config-issue</id>
+    <content type="html"><![CDATA[<p> VirtualBox是一个免费的虚拟机软件,支持多平台运行.当开发需要运行多个虚拟机时.
+ 采用VBox的复制功能就显得特别方便.但是复制一个完整的镜像后.会发现新的镜像分配不到ip地址.就算你选择了<strong><em>初始化网卡MAC地址</em></strong>复制之后也往往会发现网络无法使用这个时候我们就需要手动做些处理.下面介绍需要做一些什么样的处理.</p>
+
+<ol>
+<li><p>删除网络配置文件:</p>
+
+<p><code>sudo rm -f /etc/udev/rules.d/70-persistent-net.rules</code></p></li>
+<li><p>删除<strong><em>/etc/sysconfig/network-scripts/ifcfg-eth0</em></strong> 中的 <strong><em>HWADDR</em></strong> 以及 <strong><em>UUID</em></strong> 配置项.</p></li>
+<li><p>在 <strong><em>IPADDR</em></strong> 配置项中初始化好需要的IP地址例如 <strong><em>192.168.1.117</em></strong></p></li>
+<li><p>重启系统 <code>sudo reboot</code></p></li>
+<li><p>重新登录系统后 <code>ifconfig</code> 查看是否已经分配好了IP</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

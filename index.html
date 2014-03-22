@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+  <title>Lioooo</title>
+  <meta name="author" content="lioooo">
 
   
-  <meta name="description" content="利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括: nginx,passenger,mysql,imagemagick,mongodb etc 等一些常用工具的安装和调试.
-下面我把自己搭建的过程给分享出来,希望对你有用. 修改终端的语言 sudo nano /etc/ &hellip;">
+  <meta name="description" content="Docker的安装 Docker 是现在比较火的工具 具体介绍
+下面记录在virtualboxVM中的安装步骤 Install Docker 若没有安装过docker: sudo yum -y install docker-io
+若安装过docker: sudo yum -y update &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +23,7 @@
   <link rel="canonical" href="http://mrli.github.io">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Lioooo" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -37,9 +38,9 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
+  <h1><a href="/">Lioooo</a></h1>
   
-    <h2>A blogging framework for hackers.</h2>
+    <h2>For My Life</h2>
   
 </hgroup>
 
@@ -66,6 +67,564 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/25/install-docker/">Docker的安装和使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-25T16:35:37+08:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>Docker的安装</h4>
+
+<p>Docker 是现在比较火的工具 <a href="http://www.oschina.net/search?scope=project&amp;q=docker">具体介绍</a>
+下面记录在<a href="http://www.oschina.net/search?scope=project&amp;q=virtualbox">virtualboxVM</a>中的安装步骤 <a href="http://docs.docker.io/en/latest/installation/rhel/">Install Docker</a></p>
+
+<ol>
+<li><p>若没有安装过docker: <code>sudo yum -y install docker-io</code></p></li>
+<li><p>若安装过docker: <code>sudo yum -y update docker-io</code></p></li>
+<li><p>启动docker服务: <code>sudo service docker start</code></p></li>
+<li><p>设置docker开机自启: <code>sudo chkconfig docker on</code></p></li>
+<li><p>测试并克隆centos到docker中: <code>sudo docker run -i -t centos /bin/bash</code></p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/10/ruby-socket-study/">RubySocket 编程例子</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-10T16:43:24+08:00" pubdate data-updated="true">Mar 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ruby 的 Socket 类在默认情况下并不会被载入,它需要使用 require&#8217;socket&#8217; 导入.
+其中包括了各种用于TCP套接字、UDP套接字的类,以及必要的基本类型。</p>
+
+<p><strong>服务器部分</strong>
+server.rb</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'socket'
+</span><span class='line'>
+</span><span class='line'>server = TCPServer.new 2000 # Server bound to port 2000
+</span><span class='line'>
+</span><span class='line'>loop do
+</span><span class='line'>  client = server.accept    # Wait for a client to connect
+</span><span class='line'>  client.puts "Hello !"
+</span><span class='line'>  client.puts "Time is #{Time.now}"
+</span><span class='line'>  client.close
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>客户端部分</strong>
+client.rb</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'socket'
+</span><span class='line'>
+</span><span class='line'>s = TCPSocket.new 'localhost', 2000
+</span><span class='line'>
+</span><span class='line'>while line = s.gets # Read lines from socket
+</span><span class='line'>  puts line         # and print them
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>s.close             # close socket when done</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>分别运行脚本输出:</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Hello !
+</span><span class='line'>Time is 2014-03-11 01:08:18 +0800</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>端口绑定的注意事项</strong></p>
+
+<h5>规 则 1 : 不 要 使 用 0~1024 之 间 的 端 口</h5>
+
+<p>这 些 端 口 是 作 为 熟 知(well-known)端口并保留给系统使用的。例如HTTP默认使用端口80,SMTP默认使用端口25,rsync默认使用端口873。绑定到这些端口通常需要root权限。</p>
+
+<h5>规 则 2 : 不 要 使 用 49 000~65 535 之 间 的 端 口</h5>
+
+<p>这 些 都 是 临 时(ephemeral )端口 。通常是由那些不需要运行在预定义端口,而只是需要一些端口作为临时之需的服务使用。它们也是后面所要讲到的连接协商(connection negotiation)过程的一部分。选择该范围内的端口可能会对一些用户造成麻烦。除此之外,</p>
+
+<h5>建议使用1025~48 999之间的端口</h5>
+
+<p>需要注意的是：如果你打算选用其中的一个作为服务器端口,那你应该看一下IANA的注册端口列表1,确保你的选择不会和其他流行的服务器冲突。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/05/virtualbox-no-ip-config-issue/">克隆Virtualbox虚拟机后无Ip的解决方案</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-05T16:41:19+08:00" pubdate data-updated="true">Mar 5<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p> VirtualBox是一个免费的虚拟机软件,支持多平台运行.当开发需要运行多个虚拟机时.
+ 采用VBox的复制功能就显得特别方便.但是复制一个完整的镜像后.会发现新的镜像分配不到ip地址.就算你选择了<strong><em>初始化网卡MAC地址</em></strong>复制之后也往往会发现网络无法使用这个时候我们就需要手动做些处理.下面介绍需要做一些什么样的处理.</p>
+
+<ol>
+<li><p>删除网络配置文件:</p>
+
+<p><code>sudo rm -f /etc/udev/rules.d/70-persistent-net.rules</code></p></li>
+<li><p>删除<strong><em>/etc/sysconfig/network-scripts/ifcfg-eth0</em></strong> 中的 <strong><em>HWADDR</em></strong> 以及 <strong><em>UUID</em></strong> 配置项.</p></li>
+<li><p>在 <strong><em>IPADDR</em></strong> 配置项中初始化好需要的IP地址例如 <strong><em>192.168.1.117</em></strong></p></li>
+<li><p>重启系统 <code>sudo reboot</code></p></li>
+<li><p>重新登录系统后 <code>ifconfig</code> 查看是否已经分配好了IP</p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/02/puppet-study/">Puppet 的环境搭建及使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-02T16:44:10+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h5>软件包的安装</h5>
+
+<p>  <strong><em>puppet 的安装有多种方式,这里使用yum的方式安装</em></strong></p>
+
+<ol>
+<li><p> 首先安装ruby环境<a href="https://www.ruby-lang.org/en/installation/">Ruby的安装</a></p></li>
+<li><p> 安装puppet  <code>sudo yum install -y puppet-server puppet</code> <a href="http://docs.puppetlabs.com/guides/installation.html#red-hat-enterprise-linux-and-derivatives">Yum 安装Puppet</a></p></li>
+<li><p> 检查是否安装成功 <code>ruby -v ; puppet --version</code> 若输出版本号表明安装成功</p></li>
+</ol>
+
+
+<p> <strong><em>puppet 的安装有多种方式,这里使用ruby的gem包的方式安装</em></strong></p>
+
+<ol>
+<li><p> 首先安装ruby环境 <code>brew install ruby</code> <a href="https://www.ruby-lang.org/en/installation/">Ruby的安装</a></p>
+
+<p>1.1 安装puppet所依赖的第三方包 <code>gem install ruby-shadow -v 2.3.2</code></p></li>
+<li><p> 安装puppet gem <code>gem install puppet -v 3.4.0</code> <a href="http://docs.puppetlabs.com/guides/installation.html">Puppet 的安装</a></p></li>
+<li><p> 检查是否安装成功 <code>ruby -v ; puppet --version</code> 若输出版本号表明安装成功</p></li>
+</ol>
+
+
+<hr />
+
+<h5>生成puppet的配置文件</h5>
+
+<p>文章参考: <a href="http://docs.puppetlabs.com/guides/installation.html#mac-os-x">Gem 安装puppet的设置</a></p>
+
+<ol>
+<li><p>新建文件目录 <code>sudo mkdir -p /etc/puppet</code></p></li>
+<li><p>拷贝puppet源目录中的: <code>cp sudo cp /usr/local/lib/ruby/gems/1.9.1/gems/puppet-3.4.0/conf/auth.conf /etc/puppet/</code></p></li>
+<li><p>新建puppet的主配置文件 <code>sudo touch /etc/puppet/puppet.conf</code></p></li>
+<li><p>打开puppet master 的<strong><em>8140</em></strong>端口: <code>sudo vi /etc/sysconfig/iptables</code> 添加如下内容, <strong><em>-A INPUT -m state &mdash;state NEW -m tcp -p tcp &mdash;dport 8140 -j ACCEPT</em></strong></p></li>
+</ol>
+
+
+<hr />
+
+<h5>设置puppet</h5>
+
+<p><a href="http://docs.puppetlabs.com/guides/configuring.html">官方配置文档</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>Master: 192.168.1.116 =&gt; master.puppet.org
+</span><span class='line'>Agent : 192.168.1.117 =&gt; agent001.puppet.org
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>设置puppet master 服务器</p>
+
+<p> 1.1 修改服务器端的host方便记忆和阅读 <code>sudo echo 'HOSTNAME=master.puppet.org' &gt;&gt; /etc/sysconfig/network</code></p>
+
+<p> 1.2 添加一个测试文件,修改<strong><em>site.pp</em></strong> <code>sudo vi /etc/puppet/manifests/site.pp</code></p>
+
+<p> <strong><em> node default{file{&ldquo;/tmp/agent001-puppet-org.txt&rdquo;:content=>&ldquo;this is agent001.puppet.org test file&rdquo;;}}</em></strong></p></li>
+</ol>
+
+
+<h5>其它</h5>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/19/others/">杂项记录</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-19T16:40:01+08:00" pubdate data-updated="true">Feb 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h5>修改mac用户到wheel用户组</h5>
+
+<p> <a href="http://superuser.com/questions/64805/how-do-i-add-myself-to-the-wheel-group-to-use-cvs">参考</a>
+<code>sudo   dscl . append /Groups/admin GroupMembership mile001</code> 成功后
+<code>groups</code> 查看是否包括有<strong><em>wheel</em></strong>组</p>
+
+<h5>添加ulimit到系统环境中去</h5>
+
+<pre><code>echo "ulimit -c unlimited &gt; /dev/null 2&gt;&amp;1" &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre>
+
+<h5>Git设置全局的用户名</h5>
+
+<p>设置后团队在提交代码后便可查到是谁做的</p>
+
+<pre><code>$ git config --global user.name "lioooo"
+$ git config --global user.email "lioooo@mile.com"
+</code></pre>
+
+<h5>设置linux的hostname永久生效</h5>
+
+<pre><code>sudo echo 'HOSTNAME=agent001.puppet.org' &gt;&gt; /etc/sysconfig/network
+</code></pre>
+
+<h5>Rails 和 ActiveRecord 时间不8个小时处理方案</h5>
+
+<p>在Rails.root/application.rb中添加<a href="http://ruby-china.org/topics/3254">参考</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config.active_record.default_timezone = :local
+</span><span class='line'>config.time_zone = 'Beijing'</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/14/octopress-study/">学习octopress个人blog网站搭建</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-14T16:30:28+08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ocotpress 是一个<strong>独立博客网站</strong>用于记录和分享一些个人在开发中的心得和技巧等
+下面我们就来试着搭建一个octopress的个人网站</p>
+
+<h4>检查开发环境</h4>
+
+<ol>
+<li><p><strong>ruby</strong> 用于开发 <code>ruby -v</code></p></li>
+<li><p><strong>Git</strong> 用于版本控制 <code>git --versions</code></p></li>
+</ol>
+
+
+<h5>取得ocotpress的源代码</h5>
+
+<pre><code>git clone git://github.com/imathis/octopress.git lioooo-blog &amp;&amp; cd lioooo-blog
+
+gem install bundler &amp;&amp; bundle install
+</code></pre>
+
+<h5>初始化octopress的运行环境</h5>
+
+<pre><code>cd lioooo-blog &amp;&amp; bundle exec rake install
+</code></pre>
+
+<h5>运行octopress check 是否初始化ok</h5>
+
+<pre><code>cd lioooo-blog &amp;&amp; bundle exec rake preview
+
+open http://localhost:4000
+</code></pre>
+
+<h5>准备部署到github上去方便外网可以访问</h5>
+
+<p> <strong>octopress</strong>提供多种部署方案,这里我们只实现部署到Github网站上去.
+ 其它的部署方案可以参考<a href="http://octopress.org/docs/deploying/">Octopress部署方案</a></p>
+
+<ol>
+<li><p>创建一个新的仓库到<strong>github</strong>:
+<code>git://github.com/mlri/mrli.github.com</code></p></li>
+<li><p>设置lioooo-blog的git<strong>url</strong>指向新的仓库:
+<code>cd lioooo-blog &amp;&amp; bundle exec rake set_github_page</code></p></li>
+<li><p>部署到github上去: <code>cd liooo-blog &amp;&amp; rake generate &amp;&amp; rake deploy</code></p></li>
+<li><p>在浏览器中可以访问地址:<a href="http://mrli.github.com">http://mrli.github.com</a></p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/10/delayed-job-in-ruby/">Delayed_job 学习</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-10T16:37:13+08:00" pubdate data-updated="true">Jan 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h5>初始化环境</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo "'delayed_job_active_record','4.0.0'" &gt;&gt; Rails.root/Gemfile
+</span><span class='line'>
+</span><span class='line'>cd Rails.root; bundle install
+</span><span class='line'>
+</span><span class='line'>bundle exec rake generate delayed_job:active_record
+</span><span class='line'>
+</span><span class='line'>rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上执行完毕后基本的环境已经准备ok!</p>
+
+<h5>启动delayed_job</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd Rails.root; script/delayed_job start</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>添加一个delayed_job 到代码中</h5>
+
+<p>对于ruby 中的任何一个对象,都可以添加到delayed_job中去
+例如:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Myjob
+</span><span class='line'>  def do_something
+</span><span class='line'>     #your code
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>Myjob.new.delay.do_something</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>配置默认设置 <a href="https://github.com/collectiveidea/delayed_job#gory-details">参考配置</a></h5>
+
+<p>在rails中可以自定义修改<strong><em>delayed_job</em></strong>的默认配置</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd Rails.root; vi config/initializers/delayed_job_config.rb</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Delayed::Worker.destroy_failed_jobs = false
+</span><span class='line'>Delayed::Worker.sleep_delay = 60
+</span><span class='line'>Delayed::Worker.max_attempts = 3
+</span><span class='line'>Delayed::Worker.max_run_time = 5.minutes
+</span><span class='line'>Delayed::Worker.read_ahead = 10
+</span><span class='line'>Delayed::Worker.default_queue_name = 'default'
+</span><span class='line'>Delayed::Worker.delay_jobs = !Rails.env.test?</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>其它相关</h5>
+
+<p><strong><strong><a href="https://github.com/ejschmitt/delayed_job_web">delayed_job</a></strong></strong></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -552,265 +1111,9 @@ d中
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/13/pryxue-xi/">Pry学习</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-13T00:15:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Pry是一种功能强大的专门用来替代ruby中脚本irb的工具。</p>
-
-<ul>
-<li>即时的查看源码的方法是怎么写的 (<code>edit-method Class#method</code>)</li>
-<li>调用系统的shell命令 (start editors, run git, and rake from within Pry)</li>
-<li>查看当前的状态 (<code>cd</code>, <code>ls</code> and friends)</li>
-<li>运行时的调试 (use Pry as a developer console or debugger)</li>
-</ul>
-
-
-<h3>安装 pry</h3>
-
-<pre><code>`$&gt; gem install pry`
-</code></pre>
-
-<h3>使用 pry</h3>
-
-<pre><code>`$&gt; pry`
-</code></pre>
-
-<h3>对我来说常用的命令</h3>
-
-<pre><code>.......
-</code></pre>
-
-<h3>更多</h3>
-
-<pre><code>更多信息请查看官方文档[pry](http://pry.github.com/)
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/05/gon-xue-xi/">Gon 学习</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-05T11:08:00+08:00" pubdate data-updated="true">May 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3><strong>gon可以把controller中的变量传到js</strong></h3>
-
-<pre><code>the can get your Rails variables in your js  
-                             --form github
-</code></pre>
-
-<p>前些时间一直在找rails中有没有方法把action中的变量传到js文件中.<br/>
-确实google了一下可以用方式 &ldquo;xx.js.erb&#8221;这样的方式传值但是总觉得这样不是很方便而且效率也不是很高.<br/>
-于是又找了一下发现在<a href="http://railscasts.com/episodes/324-passing-data-to-javascript">railscast/passing-data-to-javascript</a>中有一期 &lsquo;<a href="https://github.com/gazay/gon">gon</a>&rsquo;
-可以满足我的需求,于是到官方网站中看了下.  感觉确实要用好的多只需要简单的一些数据绑定就可相互传值.</p>
-
-<p>下面是我用使用gem包的过程给大家分享出来:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/05/05/gon-xue-xi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/05/01/xue-xi-active-admin/">Activeadmin学习</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-01T21:50:00+08:00" pubdate data-updated="true">May 1<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>是什么?</h2>
-
-<p>Active Admin 是一个用来创建管理数据的框架,通常对于开发都来说都是十分简单的.他提供了良好的接口和优美的界面<br/>
-让你只做一点点的配置就可以管理数据.</p>
-
-<h2>做什么?</h2>
-
-<ol>
-<li>让开发者快速的建立一个对数据具有强大管理功能的架构.<strong>不仅仅是(增删改查)</strong></li>
-<li>提供给开发者强大的DSL功能和接口</li>
-<li>确保开发人员可以轻松地定制的每一个实现的细节</li>
-<li>构建公共的接口做为可共享的gems,有整个社区的发展。</li>
-</ol>
-
-
-<h2>开始第一个简单开发之旅:</h2>
-
-<p>   这里我会做一个简单的例子,让大家来体会Active Admin 是怎么个方便,怎么个简单,怎么个好用.</p>
-
-<h5>安装必要的开发环境(我的是环境是:rails(3.2.2)+ruby(1.9.3))安装gem包:</h5>
-
-<p>  <code>$&gt; gem 'activeadmin'</code></p>
-
-<h5>新创建一个项目:</h5>
-
-<p>  <code>$&gt; rails new active_admin_study -d mysql  &amp;&amp; cd active_admin_study</code></p>
-
-<h5>在项目根目录中生成相应的配置 :</h5>
-
-<p>  打开项目中的Gemfile 然后加上内容</p>
-
-<pre><code># 修改为taobao的镜像(主要是安装gem的时候速度快)
-source 'http://ruby.taobao.org'
-
-# 基本设置
-gem 'rails', '3.2.3'
-gem 'mysql2',"0.3.11"
-
-# 管理数据的框架
-gem 'activeadmin',"0.4.3"
-
-# 用来调试程序(设断点等功能)
-gem "pry-rails","0.1.6"
-
-group :assets do
-  gem 'sass-rails',   '~&gt; 3.2.3'
-  gem 'coffee-rails', '~&gt; 3.2.1'
-  gem 'uglifier', '&gt;= 1.0.3'
-end
-
-gem 'jquery-rails'
-</code></pre>
-
-<p>  然后执行命令<code>$&gt; bundle install</code> or <code>$&gt; bundle</code>等bundle执行完毕后</p>
-
-<p>  <code>$&gt; rails generate active_admin:install</code></p>
-
-<pre><code>1: 可能在执行的过程中会出现一个&lt;strong&gt;找不到"active_admin_study"数据库
-  &lt;strong&gt;错误,处理方法是在自己的数据库中加一个名为"active_admin_study"的库 然后再次执行.
-
-2: 如果成功执行的话会给你很多的提示信息,然后你根据提示信息设置其目录
-</code></pre>
-
-<h4>修改初始化migrate中的数据:</h4>
-
-<p>   把初始化的默认用户修改为自己的用户名和密码也可以不用修改使用默认的</p>
-
-<pre><code>User: admin@example.com  
-Password: password  
-</code></pre>
-
-<h4>执行命令:</h4>
-
-<pre><code>$&gt; rake db:migrate
-
-$&gt; rails server
-</code></pre>
-
-<h4>访问服务:</h4>
-
-<p>   <a href="http://localhost:3000/admin">http://localhost:3000/admin</a></p>
-
-<p>   输入用户名和密码,如果能进去的话.说明你已经搭起了这个框架</p>
-
-<h2>管理数据</h2>
-
-<p>   这里我们来学习怎么来管理数据库表中的数据就把我们的&#8221;admin_user&#8221; 这张表来说吧.</p>
-
-<h4>执行命令:</h4>
-
-<p>  <code>$&gt; rails generate active_admin:resource AdminUser</code></p>
-
-<p>他会生成所有关于管理&#8221;AdminUser&#8221;的文件,是的再次刷新页面你会发现多了一个&#8221;admin_user&#8221;菜单,点击后就进行了相应的管理页面</p>
-
-<h2>完结</h2>
-
-<p>  是的就这么简单,不需要你做任何的复杂的操作就可以生成这么一个简单而方便的管理框架,当然这只是一个小小的一般需求.
-  还有很多特殊的需求我们也可以用这个来实现.你可以对比官方文档来使用,自定义等</p>
-
-<p>  在我做的项目中就自己定制了很多东西,包括页面的呈现,数据的组装等</p>
-
-<p>  我会把我的学习源码放到<a href="https://github.com/mrli/active_admin_study">mrli/github</a>你可以pull来直接使用</p>
-
-<h2>更多</h2>
-
-<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x6c;&#98;&#53;&#x36;&#51;&#x40;&#x66;&#x6f;&#x78;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;">&#108;&#x62;&#53;&#x36;&#51;&#64;&#102;&#x6f;&#120;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a>)<br/>
-  更多信息<a href="http://activeadmin.info/">active_admin</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -823,23 +1126,35 @@ $&gt; rails server
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/25/install-docker/">Docker的安装和使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/10/ruby-socket-study/">RubySocket 编程例子</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/05/virtualbox-no-ip-config-issue/">克隆Virtualbox虚拟机后无Ip的解决方案</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/02/puppet-study/">Puppet 的环境搭建及使用</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/19/others/">杂项记录</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/14/octopress-study/">学习octopress个人blog网站搭建</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/10/delayed-job-in-ruby/">Delayed_job 学习</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/">Ubuntu 搭建rails 开发环境</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/20/backup-xue-xi/">Backup 学习</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/19/jewelerxue-xi/">Jeweler学习</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/13/pryxue-xi/">Pry学习</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/05/gon-xue-xi/">Gon 学习</a>
       </li>
     
   </ul>
@@ -884,7 +1199,7 @@ $&gt; rails server
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Your Name -
+  Copyright &copy; 2014 - lioooo -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

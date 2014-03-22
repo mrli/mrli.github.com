@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 工具使用 | Lioooo]]></title>
+  <link href="http://mrli.github.io/blog/categories/gong-ju-shi-yong/atom.xml" rel="self"/>
+  <link href="http://mrli.github.io/"/>
+  <updated>2014-03-22T16:49:32+08:00</updated>
+  <id>http://mrli.github.io/</id>
+  <author>
+    <name><![CDATA[lioooo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[学习octopress个人blog网站搭建]]></title>
+    <link href="http://mrli.github.io/blog/2014/02/14/octopress-study/"/>
+    <updated>2014-02-14T16:30:28+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/02/14/octopress-study</id>
+    <content type="html"><![CDATA[<p>ocotpress 是一个<strong>独立博客网站</strong>用于记录和分享一些个人在开发中的心得和技巧等
+下面我们就来试着搭建一个octopress的个人网站</p>
+
+<h4>检查开发环境</h4>
+
+<ol>
+<li><p><strong>ruby</strong> 用于开发 <code>ruby -v</code></p></li>
+<li><p><strong>Git</strong> 用于版本控制 <code>git --versions</code></p></li>
+</ol>
+
+
+<h5>取得ocotpress的源代码</h5>
+
+<pre><code>git clone git://github.com/imathis/octopress.git lioooo-blog &amp;&amp; cd lioooo-blog
+
+gem install bundler &amp;&amp; bundle install
+</code></pre>
+
+<h5>初始化octopress的运行环境</h5>
+
+<pre><code>cd lioooo-blog &amp;&amp; bundle exec rake install
+</code></pre>
+
+<h5>运行octopress check 是否初始化ok</h5>
+
+<pre><code>cd lioooo-blog &amp;&amp; bundle exec rake preview
+
+open http://localhost:4000
+</code></pre>
+
+<h5>准备部署到github上去方便外网可以访问</h5>
+
+<p> <strong>octopress</strong>提供多种部署方案,这里我们只实现部署到Github网站上去.
+ 其它的部署方案可以参考<a href="http://octopress.org/docs/deploying/">Octopress部署方案</a></p>
+
+<ol>
+<li><p>创建一个新的仓库到<strong>github</strong>:
+<code>git://github.com/mlri/mrli.github.com</code></p></li>
+<li><p>设置lioooo-blog的git<strong>url</strong>指向新的仓库:
+<code>cd lioooo-blog &amp;&amp; bundle exec rake set_github_page</code></p></li>
+<li><p>部署到github上去: <code>cd liooo-blog &amp;&amp; rake generate &amp;&amp; rake deploy</code></p></li>
+<li><p>在浏览器中可以访问地址:<a href="http://mrli.github.com">http://mrli.github.com</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

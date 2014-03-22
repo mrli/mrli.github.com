@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Lioooo]]></title>
+  <link href="http://mrli.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://mrli.github.io/"/>
+  <updated>2014-03-22T16:49:32+08:00</updated>
+  <id>http://mrli.github.io/</id>
+  <author>
+    <name><![CDATA[lioooo]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RubySocket 编程例子]]></title>
+    <link href="http://mrli.github.io/blog/2014/03/10/ruby-socket-study/"/>
+    <updated>2014-03-10T16:43:24+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/03/10/ruby-socket-study</id>
+    <content type="html"><![CDATA[<p>Ruby 的 Socket 类在默认情况下并不会被载入,它需要使用 require'socket' 导入.
+其中包括了各种用于TCP套接字、UDP套接字的类,以及必要的基本类型。</p>
+
+<p><strong>服务器部分</strong>
+server.rb</p>
+
+<p>```
+require &lsquo;socket&rsquo;</p>
+
+<p>server = TCPServer.new 2000 # Server bound to port 2000</p>
+
+<p>loop do
+  client = server.accept    # Wait for a client to connect
+  client.puts &ldquo;Hello !&rdquo;
+  client.puts &ldquo;Time is #{Time.now}&rdquo;
+  client.close
+end
+```</p>
+
+<p><strong>客户端部分</strong>
+client.rb</p>
+
+<p>```
+require &lsquo;socket&rsquo;</p>
+
+<p>s = TCPSocket.new &lsquo;localhost&rsquo;, 2000</p>
+
+<p>while line = s.gets # Read lines from socket
+  puts line         # and print them
+end</p>
+
+<p>s.close             # close socket when done
+```</p>
+
+<p><strong>分别运行脚本输出:</strong></p>
+
+<p><code>
+Hello !
+Time is 2014-03-11 01:08:18 +0800
+</code></p>
+
+<p><strong>端口绑定的注意事项</strong></p>
+
+<h5>规 则 1 : 不 要 使 用 0~1024 之 间 的 端 口</h5>
+
+<p>这 些 端 口 是 作 为 熟 知(well-known)端口并保留给系统使用的。例如HTTP默认使用端口80,SMTP默认使用端口25,rsync默认使用端口873。绑定到这些端口通常需要root权限。</p>
+
+<h5>规 则 2 : 不 要 使 用 49 000~65 535 之 间 的 端 口</h5>
+
+<p>这 些 都 是 临 时(ephemeral )端口 。通常是由那些不需要运行在预定义端口,而只是需要一些端口作为临时之需的服务使用。它们也是后面所要讲到的连接协商(connection negotiation)过程的一部分。选择该范围内的端口可能会对一些用户造成麻烦。除此之外,</p>
+
+<h5>建议使用1025~48 999之间的端口</h5>
+
+<p>需要注意的是：如果你打算选用其中的一个作为服务器端口,那你应该看一下IANA的注册端口列表1,确保你的选择不会和其他流行的服务器冲突。</p>
+]]></content>
+  </entry>
+  
+</feed>
