@@ -114,11 +114,26 @@ cd lioooo_utils & &hellip;">
 
 <p>编写库文件,也就是gem的功能代码</p>
 
+<ol>
+<li><p>在项目文件中Gemfile中添加上所需要的第三方库文件</p></li>
+<li><p>代码编写好后执行 <code>bundle install</code></p></li>
+</ol>
+
+
 <h4>setp3:</h4>
 
 <ol>
-<li><p>将写好的功能生成一个版本用于版本的控制等</p></li>
-<li><p>在本地进行安装测试,若测试没有问题就release</p></li>
+<li><p>将写好的功能生成一个版本用于版本的控制等</p>
+
+<p> <code>rake version:write MAJOR=0 MINOR=1 PATCH=0</code></p></li>
+<li><p>在本地进行安装测试,若测试没有问题就release</p>
+
+<p> <code>rake install</code></p></li>
+<li><p>在测试时会遇到找不到<strong>lib</strong>库目录.这时需要在rakefile中添加</p>
+
+<p> <code>gem.files = Dir.glob('lib/**/*.rb')</code></p>
+
+<p>把库文件引入到加载路径中去.</p></li>
 </ol>
 
 

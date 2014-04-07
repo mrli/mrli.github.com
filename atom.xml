@@ -4,7 +4,7 @@
   <title><![CDATA[lioooo]]></title>
   <link href="http://mrli.github.io/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-04-07T16:29:48+08:00</updated>
+  <updated>2014-04-07T17:16:01+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
@@ -36,11 +36,26 @@
 
 <p>编写库文件,也就是gem的功能代码</p>
 
+<ol>
+<li><p>在项目文件中Gemfile中添加上所需要的第三方库文件</p></li>
+<li><p>代码编写好后执行 <code>bundle install</code></p></li>
+</ol>
+
+
 <h4>setp3:</h4>
 
 <ol>
-<li><p>将写好的功能生成一个版本用于版本的控制等</p></li>
-<li><p>在本地进行安装测试,若测试没有问题就release</p></li>
+<li><p>将写好的功能生成一个版本用于版本的控制等</p>
+
+<p> <code>rake version:write MAJOR=0 MINOR=1 PATCH=0</code></p></li>
+<li><p>在本地进行安装测试,若测试没有问题就release</p>
+
+<p> <code>rake install</code></p></li>
+<li><p>在测试时会遇到找不到<strong>lib</strong>库目录.这时需要在rakefile中添加</p>
+
+<p> <code>gem.files = Dir.glob('lib/**/*.rb')</code></p>
+
+<p>把库文件引入到加载路径中去.</p></li>
 </ol>
 
 
@@ -1100,7 +1115,7 @@ $&gt; rails server
 
 <h2>更多</h2>
 
-<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x6c;&#x62;&#53;&#x36;&#51;&#64;&#102;&#x6f;&#x78;&#109;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;">&#x6c;&#98;&#x35;&#54;&#x33;&#x40;&#102;&#x6f;&#120;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#x6f;&#x6d;</a>)<br/>
+<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#108;&#98;&#53;&#54;&#51;&#x40;&#102;&#111;&#x78;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#108;&#98;&#x35;&#x36;&#51;&#64;&#x66;&#111;&#120;&#x6d;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>)<br/>
   更多信息<a href="http://activeadmin.info/">active_admin</a></p>
 ]]></content>
   </entry>
