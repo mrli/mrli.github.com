@@ -4,17 +4,17 @@
   <title><![CDATA[Category: Ruby | lioooo]]></title>
   <link href="http://mrli.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-04-07T17:16:01+08:00</updated>
+  <updated>2014-04-07T20:14:06+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
-    
+    <email><![CDATA[lb563@foxmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[收集制作一个常用的脚本集合Gems --lioooo_utils]]></title>
+    <title type="html"><![CDATA[收集制作一个常用的脚本集合Gems(lioooo_utils)]]></title>
     <link href="http://mrli.github.io/blog/2014/04/07/build-liooo-utils-gems/"/>
     <updated>2014-04-07T16:27:20+08:00</updated>
     <id>http://mrli.github.io/blog/2014/04/07/build-liooo-utils-gems</id>
@@ -30,6 +30,9 @@
 <li><p><code>cd lioooo_utils &amp;&amp; subl ./lioooo_utils</code></p></li>
 <li><p>修改项目目录中的Rakefile 描述信息等</p></li>
 </ol>
+
+
+<!--more-->
 
 
 <h4>setp2:</h4>
@@ -106,6 +109,9 @@ end</p>
 <p>s.close             # close socket when done
 ```</p>
 
+<!--more-->
+
+
 <p><strong>分别运行脚本输出:</strong></p>
 
 <p><code>
@@ -130,7 +136,7 @@ Time is 2014-03-11 01:08:18 +0800
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Delayed_job 学习]]></title>
+    <title type="html"><![CDATA[delayed_job 学习]]></title>
     <link href="http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby/"/>
     <updated>2014-01-10T16:37:13+08:00</updated>
     <id>http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby</id>
@@ -150,6 +156,9 @@ rake db:migrate
 <p>```</p>
 
 <p>以上执行完毕后基本的环境已经准备ok!</p>
+
+<!--more-->
+
 
 <h5>启动delayed_job</h5>
 
@@ -199,7 +208,7 @@ Delayed::Worker.delay_jobs = !Rails.env.test?
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Backup 学习]]></title>
+    <title type="html"><![CDATA[backup 学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/20/backup-xue-xi/"/>
     <updated>2012-05-20T23:19:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/20/backup-xue-xi</id>
@@ -222,6 +231,9 @@ Delayed::Worker.delay_jobs = !Rails.env.test?
 </code></pre>
 
 <p>```</p>
+
+<!--more-->
+
 
 <p>打开刚才生成的配置文件进行配置 <code>$ subl ~/dev_study/gem/backup_study</code></p>
 
@@ -257,7 +269,7 @@ end</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Jeweler学习]]></title>
+    <title type="html"><![CDATA[jeweler学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/19/jewelerxue-xi/"/>
     <updated>2012-05-19T10:41:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/19/jewelerxue-xi</id>
@@ -285,6 +297,9 @@ end</p>
 </code></pre>
 
 <p>生成过程中可以会发现:</p>
+
+<!--more-->
+
 
 <p>No github.user found in ~/.gitconfig. Please tell git about your GitHub account (see <a href="http://github.com/blog/180-local-github-config">http://github.com/blog/180-local-github-config</a> for details). For example: git config &mdash;global github.user defunkt</p>
 

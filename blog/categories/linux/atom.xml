@@ -4,11 +4,11 @@
   <title><![CDATA[Category: Linux | lioooo]]></title>
   <link href="http://mrli.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-04-07T17:16:01+08:00</updated>
+  <updated>2014-04-07T20:14:06+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
-    
+    <email><![CDATA[lb563@foxmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
@@ -84,6 +84,8 @@
 
 <hr />
 
+<p>  <!--more--></p>
+
 <h5>生成puppet的配置文件</h5>
 
 <p>文章参考: <a href="http://docs.puppetlabs.com/guides/installation.html#mac-os-x">Gem 安装puppet的设置</a></p>
@@ -125,7 +127,7 @@ Agent : 192.168.1.117 => agent001.puppet.org</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ubuntu 搭建rails 开发环境]]></title>
+    <title type="html"><![CDATA[ubuntu 搭建rails 开发环境]]></title>
     <link href="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/"/>
     <updated>2012-06-30T23:07:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing</id>
@@ -163,6 +165,9 @@ nano ~/.bash_profile 添加内容 export PATH=/opt/ruby/bin:$PATH  # 把编译�
 
 source ~/.bash_profile  ( . ~/.bash_profile) # 使刚才修改的变量生效
 </code></pre>
+
+<!--more-->
+
 
 <h2>下载并安装mongodb:</h2>
 

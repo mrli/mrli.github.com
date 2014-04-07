@@ -4,17 +4,17 @@
   <title><![CDATA[lioooo]]></title>
   <link href="http://mrli.github.io/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-04-07T17:16:01+08:00</updated>
+  <updated>2014-04-07T20:14:06+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
-    
+    <email><![CDATA[lb563@foxmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[收集制作一个常用的脚本集合Gems --lioooo_utils]]></title>
+    <title type="html"><![CDATA[收集制作一个常用的脚本集合Gems(lioooo_utils)]]></title>
     <link href="http://mrli.github.io/blog/2014/04/07/build-liooo-utils-gems/"/>
     <updated>2014-04-07T16:27:20+08:00</updated>
     <id>http://mrli.github.io/blog/2014/04/07/build-liooo-utils-gems</id>
@@ -30,6 +30,9 @@
 <li><p><code>cd lioooo_utils &amp;&amp; subl ./lioooo_utils</code></p></li>
 <li><p>修改项目目录中的Rakefile 描述信息等</p></li>
 </ol>
+
+
+<!--more-->
 
 
 <h4>setp2:</h4>
@@ -144,6 +147,11 @@ client.rb</p>
 </span><span class='line'>s.close             # close socket when done</span></code></pre></td></tr></table></div></figure>
 
 
+
+
+<!--more-->
+
+
 <p><strong>分别运行脚本输出:</strong></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -217,6 +225,8 @@ client.rb</p>
 
 
 <hr />
+
+<p>  <!--more--></p>
 
 <h5>生成puppet的配置文件</h5>
 
@@ -337,6 +347,9 @@ gem install bundler &amp;&amp; bundle install
 open http://localhost:4000
 </code></pre>
 
+<!--more-->
+
+
 <h5>准备部署到github上去方便外网可以访问</h5>
 
 <p> <strong>octopress</strong>提供多种部署方案,这里我们只实现部署到Github网站上去.
@@ -355,7 +368,7 @@ open http://localhost:4000
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Delayed_job 学习]]></title>
+    <title type="html"><![CDATA[delayed_job 学习]]></title>
     <link href="http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby/"/>
     <updated>2014-01-10T16:37:13+08:00</updated>
     <id>http://mrli.github.io/blog/2014/01/10/delayed-job-in-ruby</id>
@@ -378,6 +391,9 @@ open http://localhost:4000
 
 
 <p>以上执行完毕后基本的环境已经准备ok!</p>
+
+<!--more-->
+
 
 <h5>启动delayed_job</h5>
 
@@ -437,7 +453,7 @@ open http://localhost:4000
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ubuntu 搭建rails 开发环境]]></title>
+    <title type="html"><![CDATA[ubuntu 搭建rails 开发环境]]></title>
     <link href="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/"/>
     <updated>2012-06-30T23:07:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing</id>
@@ -475,6 +491,9 @@ nano ~/.bash_profile 添加内容 export PATH=/opt/ruby/bin:$PATH  # 把编译�
 
 source ~/.bash_profile  ( . ~/.bash_profile) # 使刚才修改的变量生效
 </code></pre>
+
+<!--more-->
+
 
 <h2>下载并安装mongodb:</h2>
 
@@ -546,7 +565,7 @@ d中
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Backup 学习]]></title>
+    <title type="html"><![CDATA[backup 学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/20/backup-xue-xi/"/>
     <updated>2012-05-20T23:19:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/20/backup-xue-xi</id>
@@ -565,6 +584,9 @@ d中
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'> $ backup generate:model --trigger db_backup --databases='mysql' --compressors='gzip' --config-path= ~/dev_study/gem/backup_study/
 </span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
 
 
 <p>打开刚才生成的配置文件进行配置 <code>$ subl ~/dev_study/gem/backup_study</code></p>
@@ -601,7 +623,7 @@ d中
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Jeweler学习]]></title>
+    <title type="html"><![CDATA[jeweler学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/19/jewelerxue-xi/"/>
     <updated>2012-05-19T10:41:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/19/jewelerxue-xi</id>
@@ -629,6 +651,9 @@ d中
 </code></pre>
 
 <p>生成过程中可以会发现:</p>
+
+<!--more-->
+
 
 <p>No github.user found in ~/.gitconfig. Please tell git about your GitHub account (see <a href="http://github.com/blog/180-local-github-config">http://github.com/blog/180-local-github-config</a> for details). For example: git config &mdash;global github.user defunkt</p>
 
@@ -841,7 +866,7 @@ d中
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Pry学习]]></title>
+    <title type="html"><![CDATA[pry学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/13/pryxue-xi/"/>
     <updated>2012-05-13T00:15:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/13/pryxue-xi</id>
@@ -878,7 +903,7 @@ d中
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Gon 学习]]></title>
+    <title type="html"><![CDATA[gon 学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/05/gon-xue-xi/"/>
     <updated>2012-05-05T11:08:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/05/gon-xue-xi</id>
@@ -1006,7 +1031,7 @@ d中
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Activeadmin学习]]></title>
+    <title type="html"><![CDATA[activeadmin学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin/"/>
     <updated>2012-05-01T21:50:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin</id>
@@ -1032,6 +1057,9 @@ d中
 <h5>安装必要的开发环境(我的是环境是:rails(3.2.2)+ruby(1.9.3))安装gem包:</h5>
 
 <p>  <code>$&gt; gem 'activeadmin'</code></p>
+
+<!--more-->
+
 
 <h5>新创建一个项目:</h5>
 
@@ -1115,7 +1143,7 @@ $&gt; rails server
 
 <h2>更多</h2>
 
-<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#108;&#98;&#53;&#54;&#51;&#x40;&#102;&#111;&#x78;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#108;&#98;&#x35;&#x36;&#51;&#64;&#x66;&#111;&#120;&#x6d;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a>)<br/>
+<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#109;&#x61;&#105;&#108;&#116;&#111;&#58;&#x6c;&#x62;&#53;&#54;&#51;&#x40;&#102;&#x6f;&#x78;&#109;&#x61;&#105;&#108;&#46;&#x63;&#111;&#x6d;">&#x6c;&#x62;&#x35;&#x36;&#51;&#64;&#x66;&#111;&#120;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#x6f;&#109;</a>)<br/>
   更多信息<a href="http://activeadmin.info/">active_admin</a></p>
 ]]></content>
   </entry>

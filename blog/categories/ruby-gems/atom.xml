@@ -4,17 +4,17 @@
   <title><![CDATA[Category: Ruby,Gems | lioooo]]></title>
   <link href="http://mrli.github.io/blog/categories/ruby-gems/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-04-07T17:16:01+08:00</updated>
+  <updated>2014-04-07T20:14:06+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
-    
+    <email><![CDATA[lb563@foxmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title type="html"><![CDATA[Activeadmin学习]]></title>
+    <title type="html"><![CDATA[activeadmin学习]]></title>
     <link href="http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin/"/>
     <updated>2012-05-01T21:50:00+08:00</updated>
     <id>http://mrli.github.io/blog/2012/05/01/xue-xi-active-admin</id>
@@ -40,6 +40,9 @@
 <h5>安装必要的开发环境(我的是环境是:rails(3.2.2)+ruby(1.9.3))安装gem包:</h5>
 
 <p>  <code>$&gt; gem 'activeadmin'</code></p>
+
+<!--more-->
+
 
 <h5>新创建一个项目:</h5>
 
@@ -123,7 +126,7 @@ $&gt; rails server
 
 <h2>更多</h2>
 
-<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#x3a;&#x6c;&#x62;&#x35;&#x36;&#51;&#x40;&#x66;&#x6f;&#120;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;">&#108;&#98;&#x35;&#x36;&#51;&#64;&#102;&#111;&#x78;&#109;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a>)<br/>
+<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#109;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#108;&#98;&#53;&#x36;&#51;&#64;&#102;&#x6f;&#120;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;">&#x6c;&#98;&#53;&#54;&#x33;&#x40;&#x66;&#x6f;&#120;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;</a>)<br/>
   更多信息<a href="http://activeadmin.info/">active_admin</a></p>
 ]]></content>
   </entry>

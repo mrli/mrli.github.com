@@ -1,98 +1,86 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Ubuntu 搭建rails 开发环境 - lioooo</title>
-  <meta name="author" content="lioooo">
+	<meta charset="utf-8">
+	<title>ubuntu 搭建rails 开发环境 - lioooo</title>
+	<meta name="author" content="lioooo">
 
-  
-  <meta name="description" content="利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括: nginx,passenger,mysql,imagemagick,mongodb etc 等一些常用工具的安装和调试.
+	
+	<meta name="description" content="利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括: nginx,passenger,mysql,imagemagick,mongodb etc 等一些常用工具的安装和调试.
 下面我把自己搭建的过程给分享出来,希望对你有用. 修改终端的语言 sudo nano /etc/ &hellip;">
-  
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="lioooo" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
+	<link href="/atom.xml" rel="alternate" title="lioooo" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">lioooo</a></h1>
-  
-    <h2>For My Life</h2>
-  
-</hgroup>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">lioooo</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mrli.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/milegamemrli" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/mrli" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:mrli.github.io">
+	</form>
+</nav>
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:mrli.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">Ubuntu 搭建rails 开发环境</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-30T23:07:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><h3>利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括:</h3>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Ubuntu 搭建rails 开发环境</h2>
+	<div class="entry-content"><h3>利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括:</h3>
 
 <p>nginx,passenger,mysql,imagemagick,mongodb etc 等一些常用工具的安装和调试.<br/>
 下面我把自己搭建的过程给分享出来,希望对你有用.</p>
@@ -126,6 +114,9 @@ nano ~/.bash_profile 添加内容 export PATH=/opt/ruby/bin:$PATH  # 把编译�
 
 source ~/.bash_profile  ( . ~/.bash_profile) # 使刚才修改的变量生效
 </code></pre>
+
+<!--more-->
+
 
 <h2>下载并安装mongodb:</h2>
 
@@ -196,14 +187,8 @@ d中
 </div>
 
 
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">lioooo</span></span>
-
-      
+<div class="meta">
+	<div class="date">
 
 
 
@@ -215,145 +200,61 @@ d中
   
 
 
-<time datetime="2012-06-30T23:07:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/linux/'>Linux</a>
-  
-</span>
+<time datetime="2012-06-30T23:07:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time></div>
+	<div class="tags">
 
 
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/" data-via="" data-counturl="http://mrli.github.io/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/" >Tweet</a>
-  
-  
-  
+	<a class='category' href='/blog/categories/linux/'>Linux</a>
+
+
 </div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/05/20/backup-xue-xi/" title="Previous Post: backup 学习">&laquo; backup 学习</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/01/10/delayed-job-in-ruby/" title="Next Post: delayed_job 学习">delayed_job 学习 &raquo;</a>
-      
-    </p>
-  </footer>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
 </article>
 
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
 </div>
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/04/07/build-liooo-utils-gems/">收集制作一个常用的脚本集合Gems --lioooo_utils</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/22/install-docker/">Docker的安装和使用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/10/ruby-socket-study/">RubySocket 编程例子</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/05/virtualbox-no-ip-config-issue/">克隆Virtualbox虚拟机后无Ip的解决方案</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/02/puppet-study/">Puppet 的环境搭建及使用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/19/others/">杂项记录</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/14/octopress-study/">学习octopress个人blog网站搭建</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/10/delayed-job-in-ruby/">Delayed_job 学习</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/mrli">@mrli</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
 
-        github.showRepos({
-            user: 'mrli',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - lioooo -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    lioooo
 
 </footer>
-  
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
 
 
 
 
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47954687-1']);
+		_gaq.push(['_trackPageview']);
 
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 
