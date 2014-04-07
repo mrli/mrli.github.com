@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Linux - lioooo</title>
+  <title>收集制作一个常用的脚本集合Gems --lioooo_utils Date: 2014-04-07 16:27:20 +0800 Comments: True Categories: Ruby - lioooo</title>
   <meta name="author" content="lioooo">
 
   
-  <meta name="description" content="Category: Linux">
+  <meta name="description" content="工作中把一些常用的脚本功能收集到一些,经过几次的使用.发现脚本功能还算比较的稳定.于是做一个常用gem方便以后直接使用. setp1: 制作gem需要用到第三方库文件Jeweler gem install jeweler
+jeweler lioooo_utils
+cd lioooo_utils & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mrli.github.ioblog/categories/linux">
+  <link rel="canonical" href="http://mrli.github.io/blog/2014/04/07/build-liooo-utils-gems">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="lioooo" type="application/atom+xml">
@@ -64,80 +66,108 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Linux</h1>
+    
+      <h1 class="entry-title">收集制作一个常用的脚本集合Gems --lioooo_utils Date: 2014-04-07 16:27:20 +0800 Comments: True Categories: Ruby</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-07T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>工作中把一些常用的脚本功能收集到一些,经过几次的使用.发现脚本功能还算比较的稳定.于是做一个常用gem方便以后直接使用.</p>
 
-  
-  <h2>2014</h2>
+<h4>setp1:</h4>
 
-<article>
-  
-<h1><a href="/blog/2014/03/22/install-docker/">Docker的安装和使用</a></h1>
-<time datetime="2014-03-22T16:35:37+08:00" pubdate><span class='month'>Mar</span> <span class='day'>22</span> <span class='year'>2014</span></time>
+<p>制作gem需要用到第三方库文件<a href="https://github.com/technicalpickles/jeweler">Jeweler</a></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>Linux</a></span>
-</footer>
-
-
-</article>
+<ol>
+<li><p><code>gem install jeweler</code></p></li>
+<li><p><code>jeweler lioooo_utils</code></p></li>
+<li><p><code>cd lioooo_utils &amp;&amp; subl ./lioooo_utils</code></p></li>
+<li><p>修改项目目录中的Rakefile 描述信息等</p></li>
+</ol>
 
 
+<h4>setp2:</h4>
 
-<article>
-  
-<h1><a href="/blog/2014/03/05/virtualbox-no-ip-config-issue/">克隆Virtualbox虚拟机后无Ip的解决方案</a></h1>
-<time datetime="2014-03-05T16:41:19+08:00" pubdate><span class='month'>Mar</span> <span class='day'>05</span> <span class='year'>2014</span></time>
+<p>编写库文件,也就是gem的功能代码</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>Linux</a></span>
-</footer>
+<h4>setp3:</h4>
 
-
-</article>
+<ol>
+<li><p>将写好的功能生成一个版本用于版本的控制等</p></li>
+<li><p>在本地进行安装测试,若测试没有问题就release</p></li>
+</ol>
 
 
+<h4>setp4:</h4>
 
-<article>
-  
-<h1><a href="/blog/2014/03/02/puppet-study/">Puppet 的环境搭建及使用</a></h1>
-<time datetime="2014-03-02T16:44:10+08:00" pubdate><span class='month'>Mar</span> <span class='day'>02</span> <span class='year'>2014</span></time>
+<p>发布版本到rubygems方便进行二次安装.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>Linux</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/">Ubuntu 搭建rails 开发环境</a></h1>
-<time datetime="2012-06-30T23:07:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>Linux</a></span>
-</footer>
-
-
-</article>
-
+<p>若发布成功后,便可以通过gem包的安装方式进行包的安装 <code>gem install lioooo_utils</code></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">lioooo</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-07T00:00:00+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mrli.github.io/blog/2014/04/07/build-liooo-utils-gems/" data-via="" data-counturl="http://mrli.github.io/blog/2014/04/07/build-liooo-utils-gems/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/22/install-docker/" title="Previous Post: Docker的安装和使用">&laquo; Docker的安装和使用</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
