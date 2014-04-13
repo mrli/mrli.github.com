@@ -7,9 +7,8 @@
 	<meta name="author" content="lioooo">
 
 	
-	<meta name="description" content="工作中把一些常用的脚本功能收集到一些,经过几次的使用.发现脚本功能还算比较的稳定.于是做一个常用gem方便以后直接使用. setp1: 制作gem需要用到第三方库文件Jeweler gem install jeweler
-jeweler lioooo_utils
-cd lioooo_utils &hellip;">
+	<meta name="description" content="使用LiooooUtils Gem 工作中写脚本的时候总会用日志文件记录每步的执行结果,这时就会用到log文件
+一些常用的写法都可以抽出来做一个gem方便其它项目的二次调用lioooo_utils就是这样诞生的. 安装 常规安装: gem install lioooo_utils &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -80,6 +79,154 @@ cd lioooo_utils &hellip;">
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/14/use-lioooo-utils/">
+		
+			使用LiooooUtils Gem</a>
+	</h2>
+	<div class="entry-content">
+		<h1>使用LiooooUtils Gem</h1>
+
+<p>工作中写脚本的时候总会用日志文件记录每步的执行结果,这时就会用到log文件
+一些常用的写法都可以抽出来做一个gem方便其它项目的二次调用<strong>lioooo_utils</strong>就是这样诞生的.</p>
+
+<h4>安装</h4>
+
+<p>常规安装:</p>
+
+<p><code>gem install lioooo_utils</code></p>
+
+<p><strong>bundler</strong>安装:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'lioooo_utils'
+</span><span class='line'>
+</span><span class='line'>bundle install 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>使用:</h4>
+
+<p>使用也很方便,例如:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'lioooo_utils'
+</span><span class='line'>
+</span><span class='line'>#需要传递两个参数: 日志文件前缀,日志文件父目录 (下面将生成'/tmp/lioooo_log.log'日志文件)
+</span><span class='line'>LiooooUtilsInstance = LiooooUtilsLogger.new :lioooo,'/tmp' 
+</span><span class='line'>
+</span><span class='line'>LiooooUtilsInstance.info '--&gt; it's ok am comming' #将记录输出到文件/tmp/lioooo_log.log文件中
+</span><span class='line'>
+</span><span class='line'>#同时可以调用*unx的shell命令
+</span><span class='line'>LiooooUtilsInstance.shell_exec 'echo ok' #将调用shell`echo`命令
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>其它</h4>
+
+<p>更多的可以参考 <a href="https://github.com/mrli/lioooo_utils">lioooo_utils</a></p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-14T01:24:40+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gem/'>Gem</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/04/14/use-lioooo-utils/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2014/04/07/del/">
+		
+			收集制作一个常用的脚本集合Gems(lioooo_utils)</a>
+	</h2>
+	<div class="entry-content">
+		<p>工作中把一些常用的脚本功能收集到一些,经过几次的使用.发现脚本功能还算比较的稳定.于是做一个常用gem方便以后直接使用.</p>
+
+<h4>setp1:</h4>
+
+<p>制作gem需要用到第三方库文件<a href="https://github.com/technicalpickles/jeweler">Jeweler</a></p>
+
+<ol>
+<li><p><code>gem install jeweler</code></p></li>
+<li><p><code>jeweler lioooo_utils</code></p></li>
+<li><p><code>cd lioooo_utils &amp;&amp; subl ./lioooo_utils</code></p></li>
+<li><p>修改项目目录中的Rakefile 描述信息等</p></li>
+</ol>
+
+
+
+		
+		<a href="/blog/2014/04/07/del/" class="more-link">更多信息-> &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-07T16:27:20+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2014/04/07/del/#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
 
 
     <article class="post">
@@ -614,142 +761,6 @@ open http://localhost:4000
 </div>
 	
 	<div class="comments"><a href="/blog/2014/01/10/delayed-job-in-ruby/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/">
-		
-			Ubuntu 搭建rails 开发环境</a>
-	</h2>
-	<div class="entry-content">
-		<h3>利用这个星期六我在ubuntu上搭建了一个rails的开发环境包括:</h3>
-
-<p>nginx,passenger,mysql,imagemagick,mongodb etc 等一些常用工具的安装和调试.<br/>
-下面我把自己搭建的过程给分享出来,希望对你有用.</p>
-
-<h2>修改终端的语言</h2>
-
-<pre><code>sudo nano /etc/default/locale1
-</code></pre>
-
-<p>  修改默认的</p>
-
-<pre><code>LANG=zh_CN.UTF-8
-LANGUAGE=zh_CN:zh
-</code></pre>
-
-<p>  为:</p>
-
-<pre><code>LANG="en_US.UTF-8"
-LANGUAGE="en_US:en"
-</code></pre>
-
-<h2>下载并安装ruby</h2>
-
-<pre><code>sudo apt-get remove --purge ruby1.8 #   删除原来的ruby1.8
-
-* mkidr -p /opt/tools &amp;&amp; cd /opt/tools &amp;&amp; wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p194.tar.gz 
-
-tar -xvf ruby-1.9.3-p194.tar.gz &amp;&amp; ./configure  --prefix=/opt/ruby &amp;&amp; make &amp;&amp; make install
-
-nano ~/.bash_profile 添加内容 export PATH=/opt/ruby/bin:$PATH  # 把编译的ruby 加到环境变量中去让系统使用手动编译的ruby
-
-source ~/.bash_profile  ( . ~/.bash_profile) # 使刚才修改的变量生效
-</code></pre>
-
-
-		
-		<a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/" class="more-link">更多信息-> &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-30T23:07:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/linux/'>Linux</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2012/06/30/ubuntu-da-jian-rails-kai-fa-huan-jing/#disqus_thread">Comments</a></div>
-	
-</div>
-</article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/blog/2012/05/20/backup-xue-xi/">
-		
-			Backup 学习</a>
-	</h2>
-	<div class="entry-content">
-		<p>用于备件数据库和文件等(主要是用ruby写的)文章参考: <a href="https://github.com/meskyanichi/backup">https://github.com/meskyanichi/backup</a></p>
-
-<p>安装</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> $ gem install backup
-</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
-
-
-<p>生成一个backup配置</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> $ backup generate:model --trigger db_backup --databases='mysql' --compressors='gzip' --config-path= ~/dev_study/gem/backup_study/
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-		
-		<a href="/blog/2012/05/20/backup-xue-xi/" class="more-link">更多信息-> &rarr;</a>
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-20T23:19:00+08:00" pubdate data-updated="true">May 20<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
-</div>
-	
-	<div class="comments"><a href="/blog/2012/05/20/backup-xue-xi/#disqus_thread">Comments</a></div>
 	
 </div>
 </article>

@@ -1,0 +1,230 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>使用LiooooUtils Gem - lioooo</title>
+	<meta name="author" content="lioooo">
+
+	
+	<meta name="description" content="使用LiooooUtils Gem 工作中写脚本的时候总会用日志文件记录每步的执行结果,这时就会用到log文件
+一些常用的写法都可以抽出来做一个gem方便其它项目的二次调用lioooo_utils就是这样诞生的. 安装 常规安装: gem install lioooo_utils &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="lioooo" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">lioooo</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:mrli.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/milegamemrli" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/mrli" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:mrli.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">使用LiooooUtils Gem</h2>
+	<div class="entry-content"><h1>使用LiooooUtils Gem</h1>
+
+<p>工作中写脚本的时候总会用日志文件记录每步的执行结果,这时就会用到log文件
+一些常用的写法都可以抽出来做一个gem方便其它项目的二次调用<strong>lioooo_utils</strong>就是这样诞生的.</p>
+
+<h4>安装</h4>
+
+<p>常规安装:</p>
+
+<p><code>gem install lioooo_utils</code></p>
+
+<p><strong>bundler</strong>安装:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'lioooo_utils'
+</span><span class='line'>
+</span><span class='line'>bundle install 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>使用:</h4>
+
+<p>使用也很方便,例如:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'lioooo_utils'
+</span><span class='line'>
+</span><span class='line'>#需要传递两个参数: 日志文件前缀,日志文件父目录 (下面将生成'/tmp/lioooo_log.log'日志文件)
+</span><span class='line'>LiooooUtilsInstance = LiooooUtilsLogger.new :lioooo,'/tmp' 
+</span><span class='line'>
+</span><span class='line'>LiooooUtilsInstance.info '--&gt; it's ok am comming' #将记录输出到文件/tmp/lioooo_log.log文件中
+</span><span class='line'>
+</span><span class='line'>#同时可以调用*unx的shell命令
+</span><span class='line'>LiooooUtilsInstance.shell_exec 'echo ok' #将调用shell`echo`命令
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>其它</h4>
+
+<p>更多的可以参考 <a href="https://github.com/mrli/lioooo_utils">lioooo_utils</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-14T01:24:40+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/gem/'>Gem</a>
+
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    lioooo
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'mrli';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mrli.github.io/blog/2014/04/14/use-lioooo-utils/';
+        var disqus_url = 'http://mrli.github.io/blog/2014/04/14/use-lioooo-utils/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47954687-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

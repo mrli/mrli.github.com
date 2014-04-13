@@ -4,7 +4,7 @@
   <title><![CDATA[lioooo]]></title>
   <link href="http://mrli.github.io/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-04-07T20:25:55+08:00</updated>
+  <updated>2014-04-14T01:35:50+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用LiooooUtils Gem]]></title>
+    <link href="http://mrli.github.io/blog/2014/04/14/use-lioooo-utils/"/>
+    <updated>2014-04-14T01:24:40+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/04/14/use-lioooo-utils</id>
+    <content type="html"><![CDATA[<h1>使用LiooooUtils Gem</h1>
+
+<p>工作中写脚本的时候总会用日志文件记录每步的执行结果,这时就会用到log文件
+一些常用的写法都可以抽出来做一个gem方便其它项目的二次调用<strong>lioooo_utils</strong>就是这样诞生的.</p>
+
+<h4>安装</h4>
+
+<p>常规安装:</p>
+
+<p><code>gem install lioooo_utils</code></p>
+
+<p><strong>bundler</strong>安装:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'lioooo_utils'
+</span><span class='line'>
+</span><span class='line'>bundle install 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>使用:</h4>
+
+<p>使用也很方便,例如:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'lioooo_utils'
+</span><span class='line'>
+</span><span class='line'>#需要传递两个参数: 日志文件前缀,日志文件父目录 (下面将生成'/tmp/lioooo_log.log'日志文件)
+</span><span class='line'>LiooooUtilsInstance = LiooooUtilsLogger.new :lioooo,'/tmp' 
+</span><span class='line'>
+</span><span class='line'>LiooooUtilsInstance.info '--&gt; it's ok am comming' #将记录输出到文件/tmp/lioooo_log.log文件中
+</span><span class='line'>
+</span><span class='line'>#同时可以调用*unx的shell命令
+</span><span class='line'>LiooooUtilsInstance.shell_exec 'echo ok' #将调用shell`echo`命令
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>其它</h4>
+
+<p>更多的可以参考 <a href="https://github.com/mrli/lioooo_utils">lioooo_utils</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[收集制作一个常用的脚本集合Gems(lioooo_utils)]]></title>
+    <link href="http://mrli.github.io/blog/2014/04/07/del/"/>
+    <updated>2014-04-07T16:27:20+08:00</updated>
+    <id>http://mrli.github.io/blog/2014/04/07/del</id>
+    <content type="html"><![CDATA[<p>工作中把一些常用的脚本功能收集到一些,经过几次的使用.发现脚本功能还算比较的稳定.于是做一个常用gem方便以后直接使用.</p>
+
+<h4>setp1:</h4>
+
+<p>制作gem需要用到第三方库文件<a href="https://github.com/technicalpickles/jeweler">Jeweler</a></p>
+
+<ol>
+<li><p><code>gem install jeweler</code></p></li>
+<li><p><code>jeweler lioooo_utils</code></p></li>
+<li><p><code>cd lioooo_utils &amp;&amp; subl ./lioooo_utils</code></p></li>
+<li><p>修改项目目录中的Rakefile 描述信息等</p></li>
+</ol>
+
+
+<!--more-->
+
+
+<h4>setp2:</h4>
+
+<p>编写库文件,也就是gem的功能代码</p>
+
+<ol>
+<li><p>在项目文件中Gemfile中添加上所需要的第三方库文件</p></li>
+<li><p>代码编写好后执行 <code>bundle install</code></p></li>
+</ol>
+
+
+<h4>setp3:</h4>
+
+<ol>
+<li><p>将写好的功能生成一个版本用于版本的控制等</p>
+
+<p> <code>rake version:write MAJOR=0 MINOR=1 PATCH=0</code></p></li>
+<li><p>在本地进行安装测试,若测试没有问题就release</p>
+
+<p> <code>rake install</code></p></li>
+<li><p>在测试时会遇到找不到<strong>lib</strong>库目录.这时需要在rakefile中添加</p>
+
+<p> <code>gem.files = Dir.glob('lib/**/*.rb')</code></p>
+
+<p>把库文件引入到加载路径中去.</p></li>
+</ol>
+
+
+<h4>setp4:</h4>
+
+<p>发布版本到rubygems方便进行二次安装.</p>
+
+<p>若发布成功后,便可以通过gem包的安装方式进行包的安装 <code>gem install lioooo_utils</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[收集制作一个常用的脚本集合Gems(lioooo_utils)]]></title>
@@ -1143,7 +1258,7 @@ $&gt; rails server
 
 <h2>更多</h2>
 
-<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#x6c;&#x62;&#53;&#54;&#x33;&#64;&#102;&#x6f;&#x78;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">&#108;&#x62;&#53;&#x36;&#x33;&#x40;&#x66;&#x6f;&#x78;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a>)<br/>
+<p>  如果你遇到什么麻烦和使用心得,而且又具有分享精神的话,欢迎联系我(<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x6c;&#x62;&#x35;&#x36;&#51;&#x40;&#102;&#x6f;&#120;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#x6c;&#98;&#53;&#54;&#51;&#x40;&#x66;&#111;&#x78;&#109;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a>)<br/>
   更多信息<a href="http://activeadmin.info/">active_admin</a></p>
 ]]></content>
   </entry>

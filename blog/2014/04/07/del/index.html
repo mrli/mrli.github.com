@@ -3,11 +3,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Category: Ruby - lioooo</title>
+	<title>收集制作一个常用的脚本集合Gems(lioooo_utils) - lioooo</title>
 	<meta name="author" content="lioooo">
 
 	
-	<meta name="description" content="Category: Ruby">
+	<meta name="description" content="工作中把一些常用的脚本功能收集到一些,经过几次的使用.发现脚本功能还算比较的稳定.于是做一个常用gem方便以后直接使用. setp1: 制作gem需要用到第三方库文件Jeweler gem install jeweler
+jeweler lioooo_utils
+cd lioooo_utils & &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -77,175 +79,106 @@
 	
 		
 	
-	<div id="content" class="inner">
-	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">收集制作一个常用的脚本集合Gems(lioooo_utils)</h2>
+	<div class="entry-content"><p>工作中把一些常用的脚本功能收集到一些,经过几次的使用.发现脚本功能还算比较的稳定.于是做一个常用gem方便以后直接使用.</p>
+
+<h4>setp1:</h4>
+
+<p>制作gem需要用到第三方库文件<a href="https://github.com/technicalpickles/jeweler">Jeweler</a></p>
+
+<ol>
+<li><p><code>gem install jeweler</code></p></li>
+<li><p><code>jeweler lioooo_utils</code></p></li>
+<li><p><code>cd lioooo_utils &amp;&amp; subl ./lioooo_utils</code></p></li>
+<li><p>修改项目目录中的Rakefile 描述信息等</p></li>
+</ol>
 
 
-	
-	
-	<section class="archives"><h1 class="year">2014</h1>
+<!--more-->
 
-<article>
-	<h2 class="title"><a href="/blog/2014/04/07/del/">收集制作一个常用的脚本集合Gems(lioooo_utils)</a></h2>
-	<div class="meta">
-		<div class="date">Apr  7</div>
-		<div class="tags">
+
+<h4>setp2:</h4>
+
+<p>编写库文件,也就是gem的功能代码</p>
+
+<ol>
+<li><p>在项目文件中Gemfile中添加上所需要的第三方库文件</p></li>
+<li><p>代码编写好后执行 <code>bundle install</code></p></li>
+</ol>
+
+
+<h4>setp3:</h4>
+
+<ol>
+<li><p>将写好的功能生成一个版本用于版本的控制等</p>
+
+<p> <code>rake version:write MAJOR=0 MINOR=1 PATCH=0</code></p></li>
+<li><p>在本地进行安装测试,若测试没有问题就release</p>
+
+<p> <code>rake install</code></p></li>
+<li><p>在测试时会遇到找不到<strong>lib</strong>库目录.这时需要在rakefile中添加</p>
+
+<p> <code>gem.files = Dir.glob('lib/**/*.rb')</code></p>
+
+<p>把库文件引入到加载路径中去.</p></li>
+</ol>
+
+
+<h4>setp4:</h4>
+
+<p>发布版本到rubygems方便进行二次安装.</p>
+
+<p>若发布成功后,便可以通过gem包的安装方式进行包的安装 <code>gem install lioooo_utils</code></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-07T16:27:20+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2014</time></div>
+	<div class="tags">
 
 
 	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
 
 
 </div>
-	    
-	    <div class="comments"><a href="/blog/2014/04/07/del/#disqus_thread">Comments</a></div>
-	    
-	</div>
-</article>
 	
-
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
 	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/04/07/build-liooo-utils-gems/">收集制作一个常用的脚本集合Gems(lioooo_utils)</a></h2>
-	<div class="meta">
-		<div class="date">Apr  7</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
 </div>
-	    
-	    <div class="comments"><a href="/blog/2014/04/07/build-liooo-utils-gems/#disqus_thread">Comments</a></div>
-	    
-	</div>
 </article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
 	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2014/03/10/ruby-socket-study/">RubySocket 编程例子</a></h2>
-	<div class="meta">
-		<div class="date">Mar 10</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
 </div>
-	    
-	</div>
-</article>
-	
-
-	
 
 
-<article>
-	<h2 class="title"><a href="/blog/2014/01/10/delayed-job-in-ruby/">delayed_job 学习</a></h2>
-	<div class="meta">
-		<div class="date">Jan 10</div>
-		<div class="tags">
 
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-	    
-	</div>
-</article>
-	
-
-	
-
-
-	
-	
-		</section>
-	
-	<section class="archives"><h1 class="year">2012</h1>
-
-<article>
-	<h2 class="title"><a href="/blog/2012/05/20/backup-xue-xi/">backup 学习</a></h2>
-	<div class="meta">
-		<div class="date">May 20</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
-</div>
-	    
-	</div>
-</article>
-	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2012/05/19/jewelerxue-xi/">jeweler学习</a></h2>
-	<div class="meta">
-		<div class="date">May 19</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
-</div>
-	    
-	</div>
-</article>
-	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2012/05/13/pryxue-xi/">pry学习</a></h2>
-	<div class="meta">
-		<div class="date">May 13</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
-</div>
-	    
-	</div>
-</article>
-	
-
-	
-
-
-<article>
-	<h2 class="title"><a href="/blog/2012/05/05/gon-xue-xi/">gon 学习</a></h2>
-	<div class="meta">
-		<div class="date">May  5</div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ruby/'>Ruby</a>
-
-
-</div>
-	    
-	</div>
-</article>
-	
-	</section>
-	
-
+</section>
 </div>
 	<footer id="footer" class="inner">Copyright &copy; 2014
 
@@ -265,7 +198,10 @@
       var disqus_shortname = 'mrli';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mrli.github.io/blog/2014/04/07/del/';
+        var disqus_url = 'http://mrli.github.io/blog/2014/04/07/del/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
