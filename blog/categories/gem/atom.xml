@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gem | lioooo]]></title>
   <link href="http://mrli.github.io/blog/categories/gem/atom.xml" rel="self"/>
   <link href="http://mrli.github.io/"/>
-  <updated>2014-04-14T01:35:50+08:00</updated>
+  <updated>2014-04-14T11:40:54+08:00</updated>
   <id>http://mrli.github.io/</id>
   <author>
     <name><![CDATA[lioooo]]></name>
@@ -18,9 +18,7 @@
     <link href="http://mrli.github.io/blog/2014/04/14/use-lioooo-utils/"/>
     <updated>2014-04-14T01:24:40+08:00</updated>
     <id>http://mrli.github.io/blog/2014/04/14/use-lioooo-utils</id>
-    <content type="html"><![CDATA[<h1>使用LiooooUtils Gem</h1>
-
-<p>工作中写脚本的时候总会用日志文件记录每步的执行结果,这时就会用到log文件
+    <content type="html"><![CDATA[<p>工作中写脚本的时候总会用日志文件记录每步的执行结果,这时就会用到log文件
 一些常用的写法都可以抽出来做一个gem方便其它项目的二次调用<strong>lioooo_utils</strong>就是这样诞生的.</p>
 
 <h4>安装</h4>
